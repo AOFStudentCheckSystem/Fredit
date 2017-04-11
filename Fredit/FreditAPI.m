@@ -27,8 +27,8 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
         // Do any other initialisation stuff here
         
         NSString* auth = [[NSUserDefaults standardUserDefaults]objectForKey:@"AuthorizationToken"];
-        if (auth != nil && ![auth isEqualToString:@""]) {
-            sharedInstance.userAuthorizationToken = false;
+        if (auth == nil || [auth isEqualToString:@""]) {
+            sharedInstance.userAuthorizationToken = @"";
         } else {
             sharedInstance.userAuthorizationToken = auth;
         }
@@ -49,6 +49,7 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
 }
 
 - (NSDictionary*) listAllEvents {
+    [UNIRest timeout:15];
     UNIHTTPJsonResponse* json = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
         simpleRequest.url = [rootURL stringByAppendingString:@"event/list"];
         simpleRequest.headers = [self getHeaders];

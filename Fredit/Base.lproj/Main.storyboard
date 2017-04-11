@@ -140,7 +140,7 @@
         <!--Events-->
         <scene sceneID="ROP-T0-sRf">
             <objects>
-                <viewController id="YDj-ym-31w" sceneMemberID="viewController">
+                <viewController id="YDj-ym-31w" customClass="EventDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jpY-k5-qpZ"/>
                         <viewControllerLayoutGuide type="bottom" id="VAX-nT-ASV"/>
@@ -165,7 +165,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="104" id="BBz-UB-Rn4">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="104" id="BBz-UB-Rn4" customClass="EventTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BBz-UB-Rn4" id="ufx-1Q-MHS">
@@ -225,6 +225,11 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="64f-0H-z2E" secondAttribute="trailing" id="rGx-8p-AIJ"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="eventDateLabel" destination="ldq-8F-DkP" id="jbZ-1E-Ilb"/>
+                                    <outlet property="eventNameLabel" destination="64f-0H-z2E" id="guz-oz-cCC"/>
+                                    <outlet property="eventStatusLabel" destination="Vnq-Rc-aVA" id="r0f-cn-SpK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -257,7 +262,7 @@
         <!--Events-->
         <scene sceneID="qFY-Bo-GUu">
             <objects>
-                <splitViewController storyboardIdentifier="splitVC" id="TUN-1U-ovw" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="splitVC" id="TUN-1U-ovw" customClass="EventSplitViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" image="EventCalendarTabIcon" id="6NB-hQ-729"/>
                     <connections>
                         <segue destination="x7W-ct-0aT" kind="relationship" relationship="masterViewController" id="97J-nF-7uL"/>

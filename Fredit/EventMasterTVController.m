@@ -9,8 +9,11 @@
 #import "EventMasterTVController.h"
 #import <UNIRest.h>
 #import <CoreData/CoreData.h>
-#import "Event+CoreDataProperties.h"
 #import "FreditAPI.h"
+#import "Event+CoreDataClass.h"
+#import "AppDelegate.h"
+#import "EventTableViewCell.h"
+
 @interface EventMasterTVController() <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
@@ -22,10 +25,8 @@
 
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
+    AppDelegate* delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    context = [[delegate persistentContainer]viewContext];
     return context;
 }
 
@@ -33,7 +34,7 @@
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
     
-    NSSortDescriptor *eventTimeAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventTime" ascending:YES];
+    NSSortDescriptor *eventTimeAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventTime" ascending:NO];
     
     [request setSortDescriptors:@[eventTimeAscSort]];
     
@@ -57,6 +58,7 @@
     [self.refreshControl addTarget:self
                             action:@selector(reloadData)
                   forControlEvents:UIControlEventValueChanged];
+    [self initializeFetchedResultsController];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -69,26 +71,53 @@
 - (void) reloadData {
     if (self.refreshControl) {
         
-        NSDictionary* data = [[FreditAPI sharedInstance]listAllEvents];
-        
-        
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                    forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        
-        [self.refreshControl endRefreshing];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSDictionary* data = [[FreditAPI sharedInstance]listAllEvents];
+            if (data != nil) {
+                NSManagedObjectContext* context = [self managedObjectContext];
+                NSMutableArray* eventIds = [[NSMutableArray alloc]init];
+                //Add new Events
+                for (NSDictionary* dict in (NSArray *)[data objectForKey:@"content"]) {
+                    Event* event = [Event fetchOrCreateWithEventId:[dict objectForKey:@"eventId"] inManagedObjectContext: context];
+                    NSString* eventId = [dict objectForKey:@"eventId"];
+                    [eventIds addObject: eventId];
+                    [event setEventId:eventId];
+                    [event setEventTime:[NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000]];
+                    event.eventStatus = [[dict objectForKey:@"eventStatus"]intValue];
+                    event.eventName = [dict objectForKey:@"eventName"];
+                    event.eventDescription = [dict objectForKey:@"eventDescription"];
+                }
+                //Remove outdate events
+                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+                [request setPredicate:[NSPredicate predicateWithFormat:@"NOT (eventId in %@)" argumentArray:@[eventIds]]];
+                NSArray* delArray = [context executeFetchRequest:request error:nil];
+                for (NSManagedObject* obj in delArray) {
+                    [context deleteObject:obj];
+                }
+                //Save Data
+                [context save:nil];
+//                [context save:nil];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"MMM d, h:mm a"];
+                NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+                NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                            forKey:NSForegroundColorAttributeName];
+                NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+                self.refreshControl.attributedTitle = attributedTitle;
+//                [[self tableView]reloadData];
+                [self.refreshControl endRefreshing];
+            });
+        });
     }
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger number = [[[self fetchedResultsController]sections]count];
     
-    if ( number == 0) {
+    if (number == 0) {
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
         messageLabel.text = @"No data is currently available. Please pull down to refresh.";
@@ -113,11 +142,9 @@
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    id cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
-    
-    Event* object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"%@", object);
-
+    EventTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
+    Event* eventObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell updateViewWithEvent:eventObject];
     return cell;
 }
 

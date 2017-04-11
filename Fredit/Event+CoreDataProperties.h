@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int32_t eventStatus;
 @property (nullable, nonatomic, copy) NSDate *eventTime;
 @property (nonatomic) int64_t id;
+@property (nullable, nonatomic, copy) NSString *eventName;
 @property (nullable, nonatomic, retain) NSSet<EventRecord *> *records;
 
 @end

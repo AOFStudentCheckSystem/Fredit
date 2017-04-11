@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Event : NSManagedObject
 
++ (instancetype) fetchOrCreateWithEventId: (NSString *)eventId inManagedObjectContext: (NSManagedObjectContext*) context;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -19,6 +19,7 @@
 @dynamic eventStatus;
 @dynamic eventTime;
 @dynamic id;
+@dynamic eventName;
 @dynamic records;
 
 @end
