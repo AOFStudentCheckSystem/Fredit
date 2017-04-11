@@ -18,7 +18,6 @@
 		C07926FE1E9C576E005C0680 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C07926FC1E9C576E005C0680 /* LaunchScreen.storyboard */; };
 		C07927081E9C594D005C0680 /* UIView+RoundCornerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C07927071E9C594D005C0680 /* UIView+RoundCornerUIView.m */; };
 		C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */; };
-		C0F3DD2E1E9D0A9E00AAC4E4 /* FreditDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD2D1E9D0A9E00AAC4E4 /* FreditDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +40,6 @@
 		C07927071E9C594D005C0680 /* UIView+RoundCornerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundCornerUIView.m"; sourceTree = "<group>"; };
 		C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditAPI.h; sourceTree = "<group>"; };
 		C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditAPI.m; sourceTree = "<group>"; };
-		C0F3DD2C1E9D0A9E00AAC4E4 /* FreditDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditDataController.h; sourceTree = "<group>"; };
-		C0F3DD2D1E9D0A9E00AAC4E4 /* FreditDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditDataController.m; sourceTree = "<group>"; };
 		D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,8 +133,6 @@
 		C0F3DD2B1E9D0A8900AAC4E4 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				C0F3DD2C1E9D0A9E00AAC4E4 /* FreditDataController.h */,
-				C0F3DD2D1E9D0A9E00AAC4E4 /* FreditDataController.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -278,7 +273,6 @@
 				C07926F31E9C576E005C0680 /* LoginViewController.m in Sources */,
 				C07926F91E9C576E005C0680 /* Fredit.xcdatamodeld in Sources */,
 				C07926F01E9C576E005C0680 /* AppDelegate.m in Sources */,
-				C0F3DD2E1E9D0A9E00AAC4E4 /* FreditDataController.m in Sources */,
 				C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */,
 				C07926ED1E9C576E005C0680 /* main.m in Sources */,
 			);

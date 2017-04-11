@@ -34,10 +34,10 @@
         <attribute name="preferredName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-441" positionY="-126" width="128" height="133"/>
-        <element name="EventRecord" positionX="-191" positionY="-27" width="128" height="118"/>
-        <element name="Student" positionX="27" positionY="-117" width="128" height="118"/>
-        <element name="EventGroup" positionX="-234" positionY="-234" width="128" height="88"/>
-        <element name="SignUpSheet" positionX="-38" positionY="-252" width="128" height="103"/>
+        <element name="Event" positionX="-441" positionY="-126" width="128" height="135"/>
+        <element name="EventGroup" positionX="-234" positionY="-234" width="128" height="90"/>
+        <element name="EventRecord" positionX="-191" positionY="-27" width="128" height="120"/>
+        <element name="SignUpSheet" positionX="-38" positionY="-252" width="128" height="105"/>
+        <element name="Student" positionX="27" positionY="-117" width="128" height="120"/>
     </elements>
 </model>

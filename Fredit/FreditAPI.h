@@ -14,6 +14,6 @@ extern const NSString* rootURL;
 
 + (instancetype) sharedInstance;
 
-- (NSArray*) listAllEvents;
+- (NSDictionary*) listAllEvents;
 
 @end
