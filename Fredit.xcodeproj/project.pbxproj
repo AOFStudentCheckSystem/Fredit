@@ -64,14 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				C07927051E9C592B005C0680 /* Categories */,
-				C07926EE1E9C576E005C0680 /* AppDelegate.h */,
-				C07926EF1E9C576E005C0680 /* AppDelegate.m */,
 				C07926F11E9C576E005C0680 /* LoginViewController.h */,
 				C07926F21E9C576E005C0680 /* LoginViewController.m */,
 				C07926F41E9C576E005C0680 /* Main.storyboard */,
-				C07926FA1E9C576E005C0680 /* Assets.xcassets */,
-				C07926FC1E9C576E005C0680 /* LaunchScreen.storyboard */,
-				C07926FF1E9C576E005C0680 /* Info.plist */,
 				C07926F71E9C576E005C0680 /* Fredit.xcdatamodeld */,
 				C07926EB1E9C576E005C0680 /* Supporting Files */,
 			);
@@ -81,6 +76,11 @@
 		C07926EB1E9C576E005C0680 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C07926FF1E9C576E005C0680 /* Info.plist */,
+				C07926FC1E9C576E005C0680 /* LaunchScreen.storyboard */,
+				C07926FA1E9C576E005C0680 /* Assets.xcassets */,
+				C07926EE1E9C576E005C0680 /* AppDelegate.h */,
+				C07926EF1E9C576E005C0680 /* AppDelegate.m */,
 				C07926EC1E9C576E005C0680 /* main.m */,
 			);
 			name = "Supporting Files";

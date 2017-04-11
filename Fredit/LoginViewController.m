@@ -11,7 +11,8 @@
 
 @interface LoginViewController ()
     @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
-
+    @property (weak, nonatomic) IBOutlet UITextField *emailInput;
+    @property (weak, nonatomic) IBOutlet UITextField *passwordInput;
 @end
 
 @implementation LoginViewController
@@ -26,6 +27,21 @@
     [super viewDidLayoutSubviews];
 }
 
+- (IBAction)onTextClickDone:(UITextField *)sender {
+    [sender resignFirstResponder];
+    if ([sender isEqual:self.emailInput]) {
+        [self.passwordInput becomeFirstResponder];
+    }
+    
+    if ([sender isEqual:self.passwordInput]) {
+        //Submit Login Request
+    }
+}
+
+- (IBAction)resignFirstResponder: (UITextField *)sender {
+    [sender resignFirstResponder];
+}
+    
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
