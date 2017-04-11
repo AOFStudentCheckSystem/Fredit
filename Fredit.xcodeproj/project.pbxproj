@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28E91853370BADEB0347DB25 /* libPods-Fredit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 448A5AB202C901882E0ECF80 /* libPods-Fredit.a */; };
+		C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */; };
 		C07926ED1E9C576E005C0680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07926EC1E9C576E005C0680 /* main.m */; };
 		C07926F01E9C576E005C0680 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C07926EF1E9C576E005C0680 /* AppDelegate.m */; };
 		C07926F31E9C576E005C0680 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C07926F21E9C576E005C0680 /* LoginViewController.m */; };
@@ -15,9 +17,15 @@
 		C07926FB1E9C576E005C0680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C07926FA1E9C576E005C0680 /* Assets.xcassets */; };
 		C07926FE1E9C576E005C0680 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C07926FC1E9C576E005C0680 /* LaunchScreen.storyboard */; };
 		C07927081E9C594D005C0680 /* UIView+RoundCornerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C07927071E9C594D005C0680 /* UIView+RoundCornerUIView.m */; };
+		C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */; };
+		C0F3DD2E1E9D0A9E00AAC4E4 /* FreditDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD2D1E9D0A9E00AAC4E4 /* FreditDataController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		448A5AB202C901882E0ECF80 /* libPods-Fredit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fredit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D393D0D764146B1DC3F59A6 /* Pods-Fredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.debug.xcconfig"; sourceTree = "<group>"; };
+		C0483C2F1E9CF1D400B0B2C0 /* EventMasterTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMasterTVController.h; sourceTree = "<group>"; };
+		C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMasterTVController.m; sourceTree = "<group>"; };
 		C07926E81E9C576E005C0680 /* Fredit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fredit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C07926EC1E9C576E005C0680 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C07926EE1E9C576E005C0680 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -31,6 +39,11 @@
 		C07926FF1E9C576E005C0680 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C07927061E9C594D005C0680 /* UIView+RoundCornerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundCornerUIView.h"; sourceTree = "<group>"; };
 		C07927071E9C594D005C0680 /* UIView+RoundCornerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundCornerUIView.m"; sourceTree = "<group>"; };
+		C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditAPI.h; sourceTree = "<group>"; };
+		C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditAPI.m; sourceTree = "<group>"; };
+		C0F3DD2C1E9D0A9E00AAC4E4 /* FreditDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditDataController.h; sourceTree = "<group>"; };
+		C0F3DD2D1E9D0A9E00AAC4E4 /* FreditDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditDataController.m; sourceTree = "<group>"; };
+		D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,17 +51,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E91853370BADEB0347DB25 /* libPods-Fredit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44911732D913FD0812D6B7EA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9D393D0D764146B1DC3F59A6 /* Pods-Fredit.debug.xcconfig */,
+				D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C0483C2E1E9CF1B600B0B2C0 /* EventViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C0483C2F1E9CF1D400B0B2C0 /* EventMasterTVController.h */,
+				C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */,
+			);
+			name = EventViewControllers;
+			sourceTree = "<group>";
+		};
 		C07926DF1E9C576E005C0680 = {
 			isa = PBXGroup;
 			children = (
 				C07926EA1E9C576E005C0680 /* Fredit */,
 				C07926E91E9C576E005C0680 /* Products */,
+				44911732D913FD0812D6B7EA /* Pods */,
+				CE923A4121293CE62F2FEE65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +97,10 @@
 		C07926EA1E9C576E005C0680 /* Fredit */ = {
 			isa = PBXGroup;
 			children = (
+				C0F3DD2B1E9D0A8900AAC4E4 /* DataModel */,
+				C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */,
+				C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */,
+				C0483C2E1E9CF1B600B0B2C0 /* EventViewControllers */,
 				C07927051E9C592B005C0680 /* Categories */,
 				C07926F11E9C576E005C0680 /* LoginViewController.h */,
 				C07926F21E9C576E005C0680 /* LoginViewController.m */,
@@ -95,6 +133,23 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		C0F3DD2B1E9D0A8900AAC4E4 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0F3DD2C1E9D0A9E00AAC4E4 /* FreditDataController.h */,
+				C0F3DD2D1E9D0A9E00AAC4E4 /* FreditDataController.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		CE923A4121293CE62F2FEE65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				448A5AB202C901882E0ECF80 /* libPods-Fredit.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,9 +157,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C07927021E9C576E005C0680 /* Build configuration list for PBXNativeTarget "Fredit" */;
 			buildPhases = (
+				5B2B4C5A28D00B16F56706DA /* [CP] Check Pods Manifest.lock */,
 				C07926E41E9C576E005C0680 /* Sources */,
 				C07926E51E9C576E005C0680 /* Frameworks */,
 				C07926E61E9C576E005C0680 /* Resources */,
+				C93316447E21F0485C27ABF1 /* [CP] Embed Pods Frameworks */,
+				B364F4DA4C4D2D19031E921A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,15 +220,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5B2B4C5A28D00B16F56706DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B364F4DA4C4D2D19031E921A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fredit/Pods-Fredit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C93316447E21F0485C27ABF1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fredit/Pods-Fredit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C07926E41E9C576E005C0680 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */,
 				C07927081E9C594D005C0680 /* UIView+RoundCornerUIView.m in Sources */,
 				C07926F31E9C576E005C0680 /* LoginViewController.m in Sources */,
 				C07926F91E9C576E005C0680 /* Fredit.xcdatamodeld in Sources */,
 				C07926F01E9C576E005C0680 /* AppDelegate.m in Sources */,
+				C0F3DD2E1E9D0A9E00AAC4E4 /* FreditDataController.m in Sources */,
+				C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */,
 				C07926ED1E9C576E005C0680 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +400,7 @@
 		};
 		C07927031E9C576E005C0680 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D393D0D764146B1DC3F59A6 /* Pods-Fredit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TTLGCTDBP6;
@@ -304,6 +414,7 @@
 		};
 		C07927041E9C576E005C0680 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TTLGCTDBP6;
