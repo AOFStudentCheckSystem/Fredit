@@ -80,6 +80,9 @@
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signInButtonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dE4-fx-34c"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRX-xo-1A2">
                                         <rect key="frame" x="0.0" y="216.5" width="338.5" height="44"/>
@@ -118,24 +121,53 @@
             </objects>
             <point key="canvasLocation" x="-484" y="9"/>
         </scene>
-        <!--About-->
-        <scene sceneID="Wm3-zi-8K4">
+        <!--Fredit-->
+        <scene sceneID="P7u-SM-Giu">
             <objects>
-                <viewController storyboardIdentifier="aboutVC" id="NSV-rI-rkK" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yM7-l9-Vd0"/>
-                        <viewControllerLayoutGuide type="bottom" id="Mnd-5u-kN5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3im-tl-b7d">
+                <tableViewController id="3dQ-lm-5N7" customClass="AboutTableTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="HWJ-Qo-Pdk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="About" image="InfoTabIcon" id="fdQ-pX-bbR"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ckx-9y-uWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Account" id="waF-4X-i2t">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eoD-7I-0y3">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eoD-7I-0y3" id="tmd-VY-Xfh">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smu-rl-EkI">
+                                                    <rect key="frame" x="157.5" y="10" width="59.5" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                    <color key="textColor" red="0.19439097800277777" green="0.55603006955000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="smu-rl-EkI" firstAttribute="centerX" secondItem="tmd-VY-Xfh" secondAttribute="centerX" id="KAo-3Q-H8U"/>
+                                                <constraint firstItem="smu-rl-EkI" firstAttribute="centerY" secondItem="tmd-VY-Xfh" secondAttribute="centerY" id="uiJ-0V-ceE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="3dQ-lm-5N7" id="ssS-gu-pUY"/>
+                            <outlet property="delegate" destination="3dQ-lm-5N7" id="Flp-GF-jQp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Fredit" id="wP9-hs-Eoj"/>
+                    <connections>
+                        <outlet property="signInStatusLabel" destination="smu-rl-EkI" id="5HF-qK-fkS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i7C-Fv-YUX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1631" y="9"/>
+            <point key="canvasLocation" x="2564" y="278"/>
         </scene>
         <!--Events-->
         <scene sceneID="ROP-T0-sRf">
@@ -154,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H81-B2-vym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2654" y="-546"/>
+            <point key="canvasLocation" x="3592.8000000000002" y="-546.47676161919048"/>
         </scene>
         <!--Events-->
         <scene sceneID="QCc-lA-tWe">
@@ -285,12 +317,31 @@
                     </tabBar>
                     <connections>
                         <segue destination="TUN-1U-ovw" kind="relationship" relationship="viewControllers" id="6bX-4P-REC"/>
-                        <segue destination="NSV-rI-rkK" kind="relationship" relationship="viewControllers" id="iEu-SE-uzW"/>
+                        <segue destination="hVQ-kE-Ac3" kind="relationship" relationship="viewControllers" id="5zg-2f-Fwe"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LhG-2C-tVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="782" y="10"/>
+        </scene>
+        <!--Info-->
+        <scene sceneID="uDF-qY-GHg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hVQ-kE-Ac3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Info" image="InfoTabIcon" id="sK0-KN-fhg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UBU-mY-k0s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3dQ-lm-5N7" kind="relationship" relationship="rootViewController" id="NMO-pW-3jb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O7Y-xw-s3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1630" y="278"/>
         </scene>
     </scenes>
     <resources>

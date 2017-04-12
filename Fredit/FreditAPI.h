@@ -10,10 +10,14 @@
 
 @interface FreditAPI : NSObject
 
+@property (strong, nonatomic, readonly) NSString* userAuthorizationToken;
+
 extern const NSString* rootURL;
 
 + (instancetype) sharedInstance;
 
 - (NSDictionary*) listAllEvents;
+
+- (BOOL) loginWithUsername: (NSString*) username andPassword: (NSString*)password;
 
 @end

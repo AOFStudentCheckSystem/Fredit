@@ -10,7 +10,7 @@
 #import <UNIRest.h>
 @interface FreditAPI()
 
-@property (strong, nonatomic) NSString* userAuthorizationToken;
+@property (strong, nonatomic, readwrite) NSString* userAuthorizationToken;
 
 @end
 
@@ -43,6 +43,7 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
     
     if (![self.userAuthorizationToken isEqualToString:@""]) {
         [headersDict setObject:self.userAuthorizationToken forKey:@"Authroization"];
+        
     }
     
     return headersDict;
@@ -56,6 +57,28 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
     }]asJson];
     
     return [[json body]JSONObject];
+}
+
+- (BOOL) loginWithUsername: (NSString*) username andPassword: (NSString*)password {
+    [UNIRest timeout: 10];
+    UNIHTTPJsonResponse* json = [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setUrl:[rootURL stringByAppendingString:@"auth/auth"]];
+        [simpleRequest setHeaders:[self getHeaders]];
+        [simpleRequest setParameters:@{@"email": username, @"password": password}];
+    }]asJson];
+    NSLog(@"Network => %li", json.code);
+    if (json.code == 200) {
+        NSString* token = [json.body.object objectForKey: @"token"];
+        [[NSUserDefaults standardUserDefaults]setObject:token forKey:@"AuthorizationToken"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        self.userAuthorizationToken = token;
+        NSLog(@"%@", token);
+        return true;
+    } else {
+        [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"AuthorizationToken"];
+        self.userAuthorizationToken = @"";
+        return false;
+    }
 }
 
 @end

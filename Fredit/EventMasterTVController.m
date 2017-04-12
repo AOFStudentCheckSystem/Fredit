@@ -13,20 +13,27 @@
 #import "Event+CoreDataClass.h"
 #import "AppDelegate.h"
 #import "EventTableViewCell.h"
-
+#import <SVProgressHUD.h>
 @interface EventMasterTVController() <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
+@property (atomic) BOOL isUpdating;
 
 @end
 
 @implementation EventMasterTVController
 
-
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     AppDelegate* delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     context = [[delegate persistentContainer]viewContext];
+    return context;
+}
+
+- (NSManagedObjectContext *)asyncManagedObjectContext {
+    NSManagedObjectContext *context = nil;
+    AppDelegate* delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    context = [[delegate persistentContainer] newBackgroundContext];
     return context;
 }
 
@@ -59,6 +66,7 @@
                             action:@selector(reloadData)
                   forControlEvents:UIControlEventValueChanged];
     [self initializeFetchedResultsController];
+    [self setIsUpdating:false];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -69,12 +77,12 @@
 }
 
 - (void) reloadData {
-    if (self.refreshControl) {
-        
+    if (self.refreshControl && !self.isUpdating) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSDictionary* data = [[FreditAPI sharedInstance]listAllEvents];
+            self.isUpdating = true;
             if (data != nil) {
-                NSManagedObjectContext* context = [self managedObjectContext];
+                NSManagedObjectContext* context = [self asyncManagedObjectContext];
                 NSMutableArray* eventIds = [[NSMutableArray alloc]init];
                 //Add new Events
                 for (NSDictionary* dict in (NSArray *)[data objectForKey:@"content"]) {
@@ -98,6 +106,7 @@
                 [context save:nil];
 //                [context save:nil];
             }
+            self.isUpdating = false;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -109,8 +118,11 @@
                 self.refreshControl.attributedTitle = attributedTitle;
 //                [[self tableView]reloadData];
                 [self.refreshControl endRefreshing];
+                [SVProgressHUD dismiss];
             });
         });
+    } else if(self.refreshControl) {
+        [self.refreshControl endRefreshing];
     }
 }
 
@@ -192,6 +204,17 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
+}
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return true;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        [SVProgressHUD showWithStatus:@"Removing..."];
+    }
 }
 
 @end

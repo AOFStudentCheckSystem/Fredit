@@ -8,7 +8,8 @@
 
 #import "LoginViewController.h"
 #import "UIView+RoundCornerUIView.h"
-
+#import <SVProgressHUD.h>
+#import "FreditAPI.h"
 @interface LoginViewController ()
     @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
     @property (weak, nonatomic) IBOutlet UITextField *emailInput;
@@ -35,17 +36,29 @@
     
     if ([sender isEqual:self.passwordInput]) {
         //Submit Login Request
+        [self signInButtonTouch:self.signUpButton];
     }
 }
 
 - (IBAction)resignFirstResponder: (UITextField *)sender {
     [sender resignFirstResponder];
 }
+- (IBAction)signInButtonTouch:(UIButton *)sender {
+    [SVProgressHUD showWithStatus:@"Signing In..."];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        BOOL result = [[FreditAPI sharedInstance] loginWithUsername:self.emailInput.text andPassword:self.passwordInput.text];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            if (result) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        });
+    });
+}
     
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

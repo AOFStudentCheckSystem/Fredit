@@ -31,6 +31,7 @@
 		C0F3DD601E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD541E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m */; };
 		C0F3DD611E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD561E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m */; };
 		C0F3DD621E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD581E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m */; };
+		C0F596191E9D97DC00408D9F /* AboutTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F596181E9D97DC00408D9F /* AboutTableTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		C0F3DD561E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SignUpSheet+CoreDataClass.m"; sourceTree = "<group>"; };
 		C0F3DD571E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignUpSheet+CoreDataProperties.h"; sourceTree = "<group>"; };
 		C0F3DD581E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SignUpSheet+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C0F596171E9D97DC00408D9F /* AboutTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableTableViewController.h; sourceTree = "<group>"; };
+		C0F596181E9D97DC00408D9F /* AboutTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableTableViewController.m; sourceTree = "<group>"; };
 		D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +142,7 @@
 		C07926EA1E9C576E005C0680 /* Fredit */ = {
 			isa = PBXGroup;
 			children = (
+				C0F596161E9D97C300408D9F /* AboutView */,
 				C0F3DD2F1E9D2A1300AAC4E4 /* Datamodel */,
 				C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */,
 				C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */,
@@ -200,6 +204,15 @@
 				C0F3DD581E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m */,
 			);
 			name = Datamodel;
+			sourceTree = "<group>";
+		};
+		C0F596161E9D97C300408D9F /* AboutView */ = {
+			isa = PBXGroup;
+			children = (
+				C0F596171E9D97DC00408D9F /* AboutTableTableViewController.h */,
+				C0F596181E9D97DC00408D9F /* AboutTableTableViewController.m */,
+			);
+			name = AboutView;
 			sourceTree = "<group>";
 		};
 		CE923A4121293CE62F2FEE65 /* Frameworks */ = {
@@ -334,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */,
+				C0F596191E9D97DC00408D9F /* AboutTableTableViewController.m in Sources */,
 				C0F3DD621E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m in Sources */,
 				C0C1A2821E9D465200AEA1E6 /* EventTableViewCell.m in Sources */,
 				C0F3DD5D1E9D334400AAC4E4 /* Student+CoreDataClass.m in Sources */,
