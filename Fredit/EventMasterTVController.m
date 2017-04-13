@@ -39,7 +39,9 @@
 
 - (void)initializeFetchedResultsController
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Event"];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    
+    request.entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:[self managedObjectContext]];
     
     NSSortDescriptor *eventTimeAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventTime" ascending:NO];
     
@@ -48,8 +50,8 @@
     NSManagedObjectContext *moc = [self managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
     
     [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil]];
-    [[self fetchedResultsController] setDelegate:self];
-    
+    [[self fetchedResultsController]setDelegate:self];
+
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
@@ -60,29 +62,34 @@
 - (void) viewDidLoad {
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor lightGrayColor];
+    UIColor* themePink = [UIColor colorWithRed:1.000 green:0.452 blue:0.756 alpha:1];
+    self.refreshControl.backgroundColor = themePink;
+    self.navigationController.navigationBar.barTintColor = themePink;
     self.refreshControl.tintColor = [UIColor whiteColor];
     [self.refreshControl addTarget:self
                             action:@selector(reloadData)
                   forControlEvents:UIControlEventValueChanged];
+    
     [self initializeFetchedResultsController];
     [self setIsUpdating:false];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    //Initialize data
     [self reloadData];
 }
-
 - (void) reloadData {
+    if (self.refreshControl && !self.refreshControl.refreshing) {
+//        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+        [[self tableView]setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:true];
+        [self.refreshControl beginRefreshing];
+    }
     if (self.refreshControl && !self.isUpdating) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSDictionary* data = [[FreditAPI sharedInstance]listAllEvents];
             self.isUpdating = true;
             if (data != nil) {
-                NSManagedObjectContext* context = [self asyncManagedObjectContext];
+                NSManagedObjectContext* context = [self managedObjectContext];
                 NSMutableArray* eventIds = [[NSMutableArray alloc]init];
                 //Add new Events
                 for (NSDictionary* dict in (NSArray *)[data objectForKey:@"content"]) {
@@ -101,13 +108,13 @@
                 NSArray* delArray = [context executeFetchRequest:request error:nil];
                 for (NSManagedObject* obj in delArray) {
                     [context deleteObject:obj];
+                    NSLog(@"Removing %@", [(Event*)obj eventName]);
                 }
                 //Save Data
-                [context save:nil];
 //                [context save:nil];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"Network Error!"];
             }
-            self.isUpdating = false;
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"MMM d, h:mm a"];
@@ -116,9 +123,9 @@
                                                                             forKey:NSForegroundColorAttributeName];
                 NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
                 self.refreshControl.attributedTitle = attributedTitle;
-//                [[self tableView]reloadData];
                 [self.refreshControl endRefreshing];
                 [SVProgressHUD dismiss];
+                self.isUpdating = false;
             });
         });
     } else if(self.refreshControl) {
@@ -149,8 +156,8 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id<NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];
-    return [sectionInfo numberOfObjects];
+//    id<NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections];
+    return [([[self fetchedResultsController]sections][section]) numberOfObjects];
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,17 +194,17 @@
 {
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
     }
 }
@@ -207,14 +214,41 @@
 }
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return true;
+    return !self.isUpdating;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isUpdating) {
+        return;
+    }
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
-        [SVProgressHUD showWithStatus:@"Removing..."];
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"Remove Event" message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* delAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [SVProgressHUD showWithStatus:@"Removing..."];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                if ([[FreditAPI sharedInstance] removeEvent:[(Event*)[[self fetchedResultsController] objectAtIndexPath:indexPath] eventId]]) {
+                    [self reloadData];
+                } else {
+                    [SVProgressHUD dismiss];
+                    [SVProgressHUD showErrorWithStatus:@"Error Occoured!"];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setEditing:false animated:true];
+                });
+            });
+        }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self setEditing:false animated:true];
+        }];
+        [controller addAction: delAction];
+        [controller addAction: cancelAction];
+        [self presentViewController:controller animated:YES completion:nil];
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"%@", segue);
 }
 
 @end

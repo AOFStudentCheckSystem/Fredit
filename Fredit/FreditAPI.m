@@ -36,13 +36,19 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
     return sharedInstance;
 }
 
+- (void)signOut {
+    [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"AuthorizationToken"];
+    self.userAuthorizationToken = @"";
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
 - (NSDictionary*) getHeaders {
     NSMutableDictionary* headersDict = [[NSMutableDictionary alloc] init];
     
     [headersDict setObject:@"application/json" forKey:@"accept"];
     
     if (![self.userAuthorizationToken isEqualToString:@""]) {
-        [headersDict setObject:self.userAuthorizationToken forKey:@"Authroization"];
+        [headersDict setObject:self.userAuthorizationToken forKey:@"Authorization"];
         
     }
     
@@ -52,10 +58,9 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
 - (NSDictionary*) listAllEvents {
     [UNIRest timeout:15];
     UNIHTTPJsonResponse* json = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
-        simpleRequest.url = [rootURL stringByAppendingString:@"event/list"];
+        simpleRequest.url = [rootURL stringByAppendingString:@"event/listall"];
         simpleRequest.headers = [self getHeaders];
     }]asJson];
-    
     return [[json body]JSONObject];
 }
 
@@ -79,6 +84,15 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
         self.userAuthorizationToken = @"";
         return false;
     }
+}
+
+- (BOOL) removeEvent:(NSString *)eventId {
+    [UNIRest timeout: 10];
+    UNIHTTPJsonResponse* r = [[UNIRest delete:^(UNISimpleRequest *simpleRequest) {
+        simpleRequest.url = [[rootURL stringByAppendingString:@"event/remove/"] stringByAppendingString:eventId];
+        simpleRequest.headers = [self getHeaders];
+    }] asJson];
+    return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
 }
 
 @end

@@ -18,6 +18,10 @@ extern const NSString* rootURL;
 
 - (NSDictionary*) listAllEvents;
 
-- (BOOL) loginWithUsername: (NSString*) username andPassword: (NSString*)password;
+- (BOOL) loginWithUsername: (NSString *) username andPassword: (NSString*)password;
+
+- (BOOL) removeEvent: (NSString *) eventId;
+
+- (void) signOut;
 
 @end

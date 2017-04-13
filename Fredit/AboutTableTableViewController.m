@@ -24,7 +24,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[self signInStatusLabel]setEnabled:[[[FreditAPI sharedInstance]userAuthorizationToken] isEqualToString:@""]];
+    [self evalLoginInformation];
+}
+
+- (void) evalLoginInformation {
+    if(![[[FreditAPI sharedInstance]userAuthorizationToken] isEqualToString:@""]){
+        self.signInStatusLabel.text = @"Sign Out";
+    } else {
+        self.signInStatusLabel.text = @"Sign In";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +55,9 @@
                 case 0:
                     if ([[[FreditAPI sharedInstance]userAuthorizationToken] isEqualToString:@""]) {
                         [self launchLoginView];
+                    } else {
+                        [[FreditAPI sharedInstance] signOut];
+                        [self evalLoginInformation];
                     }
                     break;
                 default:

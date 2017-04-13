@@ -49,8 +49,12 @@
         BOOL result = [[FreditAPI sharedInstance] loginWithUsername:self.emailInput.text andPassword:self.passwordInput.text];
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
+            [SVProgressHUD setMaximumDismissTimeInterval:3];
             if (result) {
                 [self dismissViewControllerAnimated:YES completion:nil];
+                [SVProgressHUD showSuccessWithStatus:@"Logged In"];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"Failed to Login"];
             }
         });
     });

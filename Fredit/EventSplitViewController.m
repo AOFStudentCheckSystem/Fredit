@@ -19,6 +19,8 @@
     [super viewDidLoad];
     [[self splitViewController] setDelegate:self];
     // Do any additional setup after loading the view.
+//    [self setPresentsWithGesture:false];
+    self.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 }
 
 - (void)didReceiveMemoryWarning {
