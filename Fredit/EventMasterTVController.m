@@ -14,6 +14,8 @@
 #import "AppDelegate.h"
 #import "EventTableViewCell.h"
 #import <SVProgressHUD.h>
+#import "EventDetailViewController.h"
+
 @interface EventMasterTVController() <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
@@ -72,11 +74,13 @@
     
     [self initializeFetchedResultsController];
     [self setIsUpdating:false];
+    [self reloadData];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self reloadData];
+}
+- (IBAction)addEvent:(UIBarButtonItem *)sender {
 }
 - (void) reloadData {
     if (self.refreshControl && !self.refreshControl.refreshing) {
@@ -248,7 +252,14 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSLog(@"%@", segue);
+    UIViewController* controller  = [segue destinationViewController];
+    if ([controller isKindOfClass:[UINavigationController class]]) {
+        controller = [(UINavigationController*)controller topViewController];
+    }
+    if ([controller isKindOfClass:[EventDetailViewController class]]
+        && [sender isKindOfClass:[EventTableViewCell class]]) {
+        [(EventDetailViewController *)controller populateViewWithEvent:[(EventTableViewCell*) sender baseEvent]];
+    }
 }
 
 @end

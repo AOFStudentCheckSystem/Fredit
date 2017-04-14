@@ -10,6 +10,7 @@
 #import "Event+CoreDataClass.h"
 
 @interface EventTableViewCell : UITableViewCell
+@property (strong, nonatomic, readonly) Event* baseEvent;
 
 - (void) updateViewWithEvent: (Event*) event;
 

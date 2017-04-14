@@ -257,7 +257,7 @@
 				TargetAttributes = {
 					C07926E71E9C576E005C0680 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = TTLGCTDBP6;
+						DevelopmentTeam = 7L2H4CKD5Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -489,11 +489,11 @@
 			baseConfigurationReference = 9D393D0D764146B1DC3F59A6 /* Pods-Fredit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TTLGCTDBP6;
+				DEVELOPMENT_TEAM = 7L2H4CKD5Y;
 				INFOPLIST_FILE = Fredit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.com.guardiantech.Fredit;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.codetector.checkin.Fredit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -503,11 +503,11 @@
 			baseConfigurationReference = D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TTLGCTDBP6;
+				DEVELOPMENT_TEAM = 7L2H4CKD5Y;
 				INFOPLIST_FILE = Fredit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.com.guardiantech.Fredit;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.codetector.checkin.Fredit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

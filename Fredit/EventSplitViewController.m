@@ -17,9 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[self splitViewController] setDelegate:self];
     // Do any additional setup after loading the view.
 //    [self setPresentsWithGesture:false];
+    self.delegate = self;
     self.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 }
 
@@ -29,7 +29,7 @@
 }
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    return NO;
+    return YES;
 }
 
 /*

@@ -9,6 +9,14 @@
 #import "EventDetailViewController.h"
 
 @interface EventDetailViewController ()
+@property (strong, nonatomic) Event* baseEvent;
+
+@property (weak, nonatomic) IBOutlet UIView *hoverView;
+@property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *eventStatusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *eventIdLabel;
+@property (weak, nonatomic) IBOutlet UITableView *signUpTableView;
 
 @end
 
@@ -16,13 +24,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+    if (self.baseEvent) {
+        self.hoverView.hidden = true;
+        self.eventNameLabel.text = self.baseEvent.eventName;
+        self.eventTimeLabel.text = [NSDateFormatter localizedStringFromDate:self.baseEvent.eventTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];;
+        self.eventStatusLabel.text = [NSString stringWithFormat:@"%i", self.baseEvent.eventStatus];
+        self.eventIdLabel.text = self.baseEvent.eventId;
+
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBar.barTintColor = [UIColor orangeColor];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)checkInButton:(UIButton *)sender {
+}
+
+- (void)populateViewWithEvent:(Event *)event {
+    self.baseEvent = event;
+}
+
+// UITableview Datasource
 
 /*
 #pragma mark - Navigation

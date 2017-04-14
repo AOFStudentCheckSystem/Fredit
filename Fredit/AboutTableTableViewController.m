@@ -48,6 +48,10 @@
     //    [[self navigationController]pushViewController:loginVC animated:YES];
 }
 
+- (void) launchBarcodeScanner {
+    
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch ([indexPath section]) {
         case 0:
@@ -65,6 +69,9 @@
             }
             break;
             
+        case 1:
+            [self launchBarcodeScanner];
+            break;
         default:
             break;
     }

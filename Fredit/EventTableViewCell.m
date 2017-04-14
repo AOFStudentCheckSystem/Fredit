@@ -9,6 +9,7 @@
 #import "EventTableViewCell.h"
 
 @interface EventTableViewCell()
+@property (strong, nonatomic) Event* baseEvent;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventStatusLabel;
@@ -28,6 +29,7 @@
 }
 
 - (void)updateViewWithEvent:(Event *)event {
+    self.baseEvent = event;
     self.eventNameLabel.text = event.eventName;
     self.eventDateLabel.text = [NSDateFormatter localizedStringFromDate:event.eventTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];
 }
