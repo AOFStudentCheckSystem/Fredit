@@ -83,11 +83,11 @@
 - (IBAction)addEvent:(UIBarButtonItem *)sender {
 }
 - (void) reloadData {
-    if (self.refreshControl && !self.refreshControl.refreshing) {
-//        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
-        [[self tableView]setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:true];
-        [self.refreshControl beginRefreshing];
-    }
+//    if (self.refreshControl && !self.refreshControl.refreshing) {
+////        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
+//        [[self tableView]setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:true];
+//        [self.refreshControl beginRefreshing];
+//    }
     if (self.refreshControl && !self.isUpdating) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSDictionary* data = [[FreditAPI sharedInstance]listAllEvents];
