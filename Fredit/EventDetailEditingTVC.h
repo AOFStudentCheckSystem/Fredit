@@ -10,4 +10,6 @@
 
 @interface EventDetailEditingTVC : UITableViewController
 
+@property (strong, nonatomic, readonly) NSDate *eventDate;
+
 @end

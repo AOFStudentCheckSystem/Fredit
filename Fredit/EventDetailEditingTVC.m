@@ -13,21 +13,24 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *eventNameTextField;
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *eventDatetimePicker;
-
+@property (strong, nonatomic) NSDate *eventDate;
+@property (strong, nonatomic) NSDateFormatter *labelFormatter;
 @end
 
 UIColor* highLightTextColor;
 bool isDatetimeEditing = false;
 
 @implementation EventDetailEditingTVC
-- (IBAction)onEventDateTimePickerChange:(UIDatePicker *)sender {
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Initializing Variables
     
     highLightTextColor = [UIColor colorWithRGB:0xFF2D55]; // Apple recomended pink color for selected date and stuff
+    
+    self.labelFormatter = [[NSDateFormatter alloc]init];
+    self.labelFormatter.dateStyle = NSDateFormatterMediumStyle;
+    self.labelFormatter.timeStyle = NSDateFormatterShortStyle;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,6 +41,11 @@ bool isDatetimeEditing = false;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void) setEventDate:(NSDate *)eventDate {
+    _eventDate = eventDate;
+    self.eventTimeLabel.text = [self.labelFormatter stringFromDate:_eventDate];
 }
 
 - (void)showStatusPickerCell {
@@ -89,49 +97,9 @@ bool isDatetimeEditing = false;
     [self.tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+- (IBAction)onEventDateTimePickerChange:(UIDatePicker *)sender {
+    self.eventDate = sender.date;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
