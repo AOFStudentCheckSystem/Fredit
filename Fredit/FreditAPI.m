@@ -95,4 +95,16 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
     return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
 }
 
+- (BOOL) creditEventWithId: (NSString*) eventId andEventName: (NSString*) name andTime: (NSDate*) time andDescription: (NSString*) description
+{
+    NSDictionary* params = @{@"eventId":eventId, @"name":name, @"time":[NSString stringWithFormat:@"%li",((long)floor(time.timeIntervalSince1970 * 1000))], @"description":description};
+    [UNIRest timeout: 10];
+    UNIHTTPJsonResponse* r = [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
+        simpleRequest.url = [rootURL stringByAppendingString:@"event/credit"];
+        simpleRequest.headers = [self getHeaders];
+        simpleRequest.parameters = params;
+    }] asJson];
+    return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
+}
+
 @end

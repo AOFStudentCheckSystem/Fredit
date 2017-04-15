@@ -10,11 +10,13 @@
 #import <UNIRest.h>
 #import <CoreData/CoreData.h>
 #import "FreditAPI.h"
+#import "FreditDataAccessObject.h"
 #import "Event+CoreDataClass.h"
 #import "AppDelegate.h"
 #import "EventTableViewCell.h"
 #import <SVProgressHUD.h>
 #import "EventDetailViewController.h"
+#import "EventDetailEditingTVC.h"
 
 @interface EventMasterTVController() <NSFetchedResultsControllerDelegate>
 
@@ -81,6 +83,10 @@
     [super viewDidAppear:animated];
 }
 - (IBAction)addEvent:(UIBarButtonItem *)sender {
+    EventDetailEditingTVC* editing = [self.storyboard instantiateViewControllerWithIdentifier:@"eventDetailEditVC"];
+    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:editing];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:nav animated:YES completion:nil];
 }
 - (void) reloadData {
 //    if (self.refreshControl && !self.refreshControl.refreshing) {
@@ -90,35 +96,8 @@
 //    }
     if (self.refreshControl && !self.isUpdating) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSDictionary* data = [[FreditAPI sharedInstance]listAllEvents];
             self.isUpdating = true;
-            if (data != nil) {
-                NSManagedObjectContext* context = [self managedObjectContext];
-                NSMutableArray* eventIds = [[NSMutableArray alloc]init];
-                //Add new Events
-                for (NSDictionary* dict in (NSArray *)[data objectForKey:@"content"]) {
-                    Event* event = [Event fetchOrCreateWithEventId:[dict objectForKey:@"eventId"] inManagedObjectContext: context];
-                    NSString* eventId = [dict objectForKey:@"eventId"];
-                    [eventIds addObject: eventId];
-                    [event setEventId:eventId];
-                    [event setEventTime:[NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000]];
-                    event.eventStatus = [[dict objectForKey:@"eventStatus"]intValue];
-                    event.eventName = [dict objectForKey:@"eventName"];
-                    event.eventDescription = [dict objectForKey:@"eventDescription"];
-                }
-                //Remove outdate events
-                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
-                [request setPredicate:[NSPredicate predicateWithFormat:@"NOT (eventId in %@)" argumentArray:@[eventIds]]];
-                NSArray* delArray = [context executeFetchRequest:request error:nil];
-                for (NSManagedObject* obj in delArray) {
-                    [context deleteObject:obj];
-                    NSLog(@"Removing %@", [(Event*)obj eventName]);
-                }
-                //Save Data
-//                [context save:nil];
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"Network Error!"];
-            }
+            [FreditDataAccessObject updateAllEventsFromServerInContext:[self managedObjectContext]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"MMM d, h:mm a"];

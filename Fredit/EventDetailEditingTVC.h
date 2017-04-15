@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Event+CoreDataClass.h"
 
 @interface EventDetailEditingTVC : UITableViewController
 
 @property (strong, nonatomic, readonly) NSDate *eventDate;
+@property (strong, nonatomic) Event* targetEvent;
 
 @end
