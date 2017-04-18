@@ -7,7 +7,7 @@
 //
 
 #import "FreditAPI.h"
-#import <UNIRest.h>
+#import "UNIRest.h"
 @interface FreditAPI()
 
 @property (strong, nonatomic, readwrite) NSString* userAuthorizationToken;

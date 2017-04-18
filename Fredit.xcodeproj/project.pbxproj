@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28E91853370BADEB0347DB25 /* libPods-Fredit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 448A5AB202C901882E0ECF80 /* libPods-Fredit.a */; };
+		4B1830CC5F2A646F0AC7DBBD /* Pods_Fredit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9679EA3243DBFA67F24861CC /* Pods_Fredit.framework */; };
 		C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */; };
 		C04A27CD1EA1C8C3003377B9 /* EventDetailEditingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C04A27CC1EA1C8C3003377B9 /* EventDetailEditingTVC.m */; };
 		C04A27D01EA1CC5B003377B9 /* UIColor+ColorFromRGB.m in Sources */ = {isa = PBXBuildFile; fileRef = C04A27CF1EA1CC5B003377B9 /* UIColor+ColorFromRGB.m */; };
@@ -39,7 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		448A5AB202C901882E0ECF80 /* libPods-Fredit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fredit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9679EA3243DBFA67F24861CC /* Pods_Fredit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fredit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D393D0D764146B1DC3F59A6 /* Pods-Fredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.debug.xcconfig"; sourceTree = "<group>"; };
 		C0483C2F1E9CF1D400B0B2C0 /* EventMasterTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMasterTVController.h; sourceTree = "<group>"; };
 		C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMasterTVController.m; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28E91853370BADEB0347DB25 /* libPods-Fredit.a in Frameworks */,
+				4B1830CC5F2A646F0AC7DBBD /* Pods_Fredit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +254,7 @@
 		CE923A4121293CE62F2FEE65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				448A5AB202C901882E0ECF80 /* libPods-Fredit.a */,
+				9679EA3243DBFA67F24861CC /* Pods_Fredit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

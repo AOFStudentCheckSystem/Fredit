@@ -8,12 +8,12 @@
 
 #import "EventDetailEditingTVC.h"
 #import "UIColor+ColorFromRGB.h"
-#import <MBAutoGrowingTextView.h>
+#import "MBAutoGrowingTextView.h"
 #import "NSDate+Rounding.h"
 #import "AppDelegate.h"
 #import "FreditAPI.h"
 #import "FreditDataAccessObject.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 
 @interface EventDetailEditingTVC ()
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
@@ -40,7 +40,7 @@ bool isDatetimeEditing = false;
     self.labelFormatter.dateStyle = NSDateFormatterMediumStyle;
     self.labelFormatter.timeStyle = NSDateFormatterShortStyle;
     
-    self.eventDate = [NSDate date];
+    self.eventDate = [[NSDate date]roundDateToNearestFifteenMinutes];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finishEdit)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAndClose)];
@@ -62,7 +62,8 @@ bool isDatetimeEditing = false;
     return context;
 }
 
-- (void)viewDidLayoutSubviews {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     if (self.targetEvent) {
         self.eventDate = self.targetEvent.eventTime;
         self.eventNameTextField.text = self.targetEvent.eventName;

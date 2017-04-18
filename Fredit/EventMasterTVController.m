@@ -7,14 +7,14 @@
 //
 
 #import "EventMasterTVController.h"
-#import <UNIRest.h>
+#import "UNIRest.h"
 #import <CoreData/CoreData.h>
 #import "FreditAPI.h"
 #import "FreditDataAccessObject.h"
 #import "Event+CoreDataClass.h"
 #import "AppDelegate.h"
 #import "EventTableViewCell.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "EventDetailViewController.h"
 #import "EventDetailEditingTVC.h"
 
@@ -77,6 +77,8 @@
     [self initializeFetchedResultsController];
     [self setIsUpdating:false];
     [self reloadData];
+    self.tableView.estimatedRowHeight = 110;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -95,9 +97,15 @@
 //        [self.refreshControl beginRefreshing];
 //    }
     if (self.refreshControl && !self.isUpdating) {
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             self.isUpdating = true;
-            [FreditDataAccessObject updateAllEventsFromServerInContext:[self managedObjectContext]];
+            NSManagedObjectContext* context = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            [context setParentContext:[self managedObjectContext]];
+            [context performBlockAndWait:^{
+                [FreditDataAccessObject updateAllEventsFromServerInContext:context];
+                [[self managedObjectContext]save:nil];
+            }];
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateFormat:@"MMM d, h:mm a"];
@@ -147,6 +155,33 @@
     EventTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"eventCell" forIndexPath:indexPath];
     Event* eventObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell updateViewWithEvent:eventObject];
+    
+    //Setup the slides
+    
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"Remove Event" message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* delAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [SVProgressHUD showWithStatus:@"Removing..."];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                if ([[FreditAPI sharedInstance] removeEvent:[(Event*)[[self fetchedResultsController] objectAtIndexPath:indexPath] eventId]]) {
+                    [self reloadData];
+                } else {
+                    [SVProgressHUD dismiss];
+                    [SVProgressHUD showErrorWithStatus:@"Error Occoured!"];
+                }
+            });
+        }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self setEditing:false animated:true];
+        }];
+        [controller addAction: delAction];
+        [controller addAction: cancelAction];
+        [self presentViewController:controller animated:YES completion:nil];
+        return true;
+    }]];
+    
+    cell.rightExpansion.fillOnTrigger = true;
+    
     return cell;
 }
 
@@ -194,10 +229,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
-}
-
-- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return !self.isUpdating;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

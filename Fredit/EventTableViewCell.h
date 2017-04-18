@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MGSwipeTableCell.h"
 #import "Event+CoreDataClass.h"
 
-@interface EventTableViewCell : UITableViewCell
+@interface EventTableViewCell : MGSwipeTableCell
 @property (strong, nonatomic, readonly) Event* baseEvent;
 
 - (void) updateViewWithEvent: (Event*) event;

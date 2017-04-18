@@ -9,7 +9,7 @@
 #import "FreditDataAccessObject.h"
 #import "FreditAPI.h"
 #import "Event+CoreDataClass.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 
 @implementation FreditDataAccessObject
 
@@ -22,11 +22,26 @@
             Event* event = [Event fetchOrCreateWithEventId:[dict objectForKey:@"eventId"] inManagedObjectContext: context];
             NSString* eventId = [dict objectForKey:@"eventId"];
             [eventIds addObject: eventId];
-            [event setEventId:eventId];
-            [event setEventTime:[NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000]];
-            event.eventStatus = [[dict objectForKey:@"eventStatus"]intValue];
-            event.eventName = [dict objectForKey:@"eventName"];
-            event.eventDescription = [dict objectForKey:@"eventDescription"];
+            //Update event obj
+            if (![event.eventId isEqualToString:eventId]) {
+                [event setEventId:eventId];
+            }
+            NSDate* newDate = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000];
+            if (![event.eventTime isEqualToDate:newDate]) {
+                [event setEventTime:[NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000]];
+            }
+            int newStatus = [[dict objectForKey:@"eventStatus"]intValue];
+            if (event.eventStatus != newStatus) {
+                event.eventStatus = newStatus;
+            }
+            NSString* newName = [dict objectForKey:@"eventName"];
+            if (![event.eventName isEqualToString:newName]) {
+                event.eventName = newName;
+            }
+            NSString* newDescription = [dict objectForKey:@"eventDescription"];
+            if (![event.eventDescription isEqualToString:newDescription]) {
+                event.eventDescription = newDescription;
+            }
         }
         //Remove outdate events
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
@@ -37,7 +52,7 @@
             NSLog(@"Removing %@", [(Event*)obj eventName]);
         }
         //Save Data
-        //                [context save:nil];
+        [context save:nil];
     } else {
         [SVProgressHUD showErrorWithStatus:@"Network Error!"];
     }
