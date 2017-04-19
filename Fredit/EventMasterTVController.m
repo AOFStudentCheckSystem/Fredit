@@ -18,7 +18,7 @@
 #import "EventDetailViewController.h"
 #import "EventDetailEditingTVC.h"
 
-@interface EventMasterTVController() <NSFetchedResultsControllerDelegate>
+@interface EventMasterTVController() <NSFetchedResultsControllerDelegate, MGSwipeTableCellDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController* fetchedResultsController;
 @property (atomic) BOOL isUpdating;
@@ -126,8 +126,7 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger number = [[[self fetchedResultsController]sections]count];
-    
-    if (number == 0) {
+    if (number == 0 || [[[self fetchedResultsController]sections][0]numberOfObjects] == 0) {
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
         messageLabel.text = @"No data is currently available. Please pull down to refresh.";
@@ -163,7 +162,7 @@
         UIAlertAction* delAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             [SVProgressHUD showWithStatus:@"Removing..."];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                if ([[FreditAPI sharedInstance] removeEvent:[(Event*)[[self fetchedResultsController] objectAtIndexPath:indexPath] eventId]]) {
+                if ([[FreditAPI sharedInstance] removeEvent:[(Event*)[[self fetchedResultsController] objectAtIndexPath:[self.tableView indexPathForCell:cell]] eventId]]) {
                     [self reloadData];
                 } else {
                     [SVProgressHUD dismiss];
@@ -180,10 +179,13 @@
         return true;
     }]];
     
-    cell.rightExpansion.fillOnTrigger = true;
+    cell.rightExpansion.fillOnTrigger = YES;
+    cell.rightExpansion.buttonIndex = 0;
     
     return cell;
 }
+
+
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

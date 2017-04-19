@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
+#import "CoreDataSyncorization.h"
 
 @interface AppDelegate ()
 

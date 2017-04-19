@@ -1,9 +1,9 @@
 //
 //  Student+CoreDataProperties.h
-//  
+//  Fredit
 //
-//  Created by Codetector on 2017/4/11.
-//
+//  Created by Codetector on 2017/4/19.
+//  Copyright © 2017年 GuardianTechnologies. All rights reserved.
 //
 
 #import "Student+CoreDataClass.h"
@@ -20,6 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *idNumber;
 @property (nullable, nonatomic, copy) NSString *lastName;
 @property (nullable, nonatomic, copy) NSString *preferredName;
+@property (nullable, nonatomic, retain) NSSet<EventRecord *> *records;
+
+@end
+
+@interface Student (CoreDataGeneratedAccessors)
+
+- (void)addRecordsObject:(EventRecord *)value;
+- (void)removeRecordsObject:(EventRecord *)value;
+- (void)addRecords:(NSSet<EventRecord *> *)values;
+- (void)removeRecords:(NSSet<EventRecord *> *)values;
 
 @end
 

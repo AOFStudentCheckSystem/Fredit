@@ -1,9 +1,9 @@
 //
 //  Event+CoreDataProperties.h
-//  
+//  Fredit
 //
-//  Created by Codetector on 2017/4/11.
-//
+//  Created by Codetector on 2017/4/19.
+//  Copyright © 2017年 GuardianTechnologies. All rights reserved.
 //
 
 #import "Event+CoreDataClass.h"
@@ -15,17 +15,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Event *> *)fetchRequest;
 
+@property (nonatomic) int16_t changed;
 @property (nullable, nonatomic, copy) NSString *eventDescription;
 @property (nullable, nonatomic, copy) NSString *eventId;
+@property (nullable, nonatomic, copy) NSString *eventName;
 @property (nonatomic) int32_t eventStatus;
 @property (nullable, nonatomic, copy) NSDate *eventTime;
-@property (nonatomic) int64_t id;
-@property (nullable, nonatomic, copy) NSString *eventName;
+@property (nullable, nonatomic, retain) NSSet<EventGroup *> *inGroup;
 @property (nullable, nonatomic, retain) NSSet<EventRecord *> *records;
 
 @end
 
 @interface Event (CoreDataGeneratedAccessors)
+
+- (void)addInGroupObject:(EventGroup *)value;
+- (void)removeInGroupObject:(EventGroup *)value;
+- (void)addInGroup:(NSSet<EventGroup *> *)values;
+- (void)removeInGroup:(NSSet<EventGroup *> *)values;
 
 - (void)addRecordsObject:(EventRecord *)value;
 - (void)removeRecordsObject:(EventRecord *)value;

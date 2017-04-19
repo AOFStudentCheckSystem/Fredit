@@ -16,7 +16,7 @@
 
 @implementation FreditAPI
 
-NSString* rootURL = @"https://check.guardiantech.com.cn/";
+NSString* rootURL = @"https://api.aofactivities.com/";
 
 + (instancetype)sharedInstance
 {
@@ -36,6 +36,10 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
     return sharedInstance;
 }
 
+- (BOOL) isAuthenticated {
+    return self.userAuthorizationToken != nil && ![self.userAuthorizationToken isEqualToString:@""];
+}
+
 - (void)signOut {
     [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:@"AuthorizationToken"];
     self.userAuthorizationToken = @"";
@@ -47,7 +51,7 @@ NSString* rootURL = @"https://check.guardiantech.com.cn/";
     
     [headersDict setObject:@"application/json" forKey:@"accept"];
     
-    if (![self.userAuthorizationToken isEqualToString:@""]) {
+    if ([self isAuthenticated]) {
         [headersDict setObject:self.userAuthorizationToken forKey:@"Authorization"];
         
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="changed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,7 +38,7 @@
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EventRecord" inverseName="student" inverseEntity="EventRecord" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-441" positionY="-126" width="128" height="150"/>
+        <element name="Event" positionX="-441" positionY="-126" width="128" height="165"/>
         <element name="EventGroup" positionX="-234" positionY="-234" width="128" height="105"/>
         <element name="EventRecord" positionX="-191" positionY="-27" width="128" height="120"/>
         <element name="SignUpSheet" positionX="-38" positionY="-252" width="128" height="105"/>

@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		4B1830CC5F2A646F0AC7DBBD /* Pods_Fredit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9679EA3243DBFA67F24861CC /* Pods_Fredit.framework */; };
+		C0080B341EA823FE00F62458 /* EventGroup+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B211EA823FE00F62458 /* EventGroup+CoreDataClass.m */; };
+		C0080B351EA823FE00F62458 /* EventGroup+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B231EA823FE00F62458 /* EventGroup+CoreDataProperties.m */; };
+		C0080B361EA823FE00F62458 /* SignUpSheet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B251EA823FE00F62458 /* SignUpSheet+CoreDataClass.m */; };
+		C0080B371EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B271EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m */; };
+		C0080B381EA823FE00F62458 /* Student+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B291EA823FE00F62458 /* Student+CoreDataClass.m */; };
+		C0080B391EA823FE00F62458 /* Student+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B2B1EA823FE00F62458 /* Student+CoreDataProperties.m */; };
+		C0080B3A1EA823FE00F62458 /* EventRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B2D1EA823FE00F62458 /* EventRecord+CoreDataClass.m */; };
+		C0080B3B1EA823FE00F62458 /* EventRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B2F1EA823FE00F62458 /* EventRecord+CoreDataProperties.m */; };
+		C0080B3C1EA823FE00F62458 /* Event+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B311EA823FE00F62458 /* Event+CoreDataClass.m */; };
+		C0080B3D1EA823FE00F62458 /* Event+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0080B331EA823FE00F62458 /* Event+CoreDataProperties.m */; };
 		C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */; };
 		C04A27CD1EA1C8C3003377B9 /* EventDetailEditingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C04A27CC1EA1C8C3003377B9 /* EventDetailEditingTVC.m */; };
 		C04A27D01EA1CC5B003377B9 /* UIColor+ColorFromRGB.m in Sources */ = {isa = PBXBuildFile; fileRef = C04A27CF1EA1CC5B003377B9 /* UIColor+ColorFromRGB.m */; };
@@ -21,26 +31,38 @@
 		C07927081E9C594D005C0680 /* UIView+RoundCornerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C07927071E9C594D005C0680 /* UIView+RoundCornerUIView.m */; };
 		C08379AC1EA2764100206B83 /* NSDate+Rounding.m in Sources */ = {isa = PBXBuildFile; fileRef = C08379AB1EA2764100206B83 /* NSDate+Rounding.m */; };
 		C08379B01EA27FFE00206B83 /* FreditDataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C08379AF1EA27FFE00206B83 /* FreditDataAccessObject.m */; };
+		C0B6B5FC1EA8175E00ABDB2D /* CoreDataSyncorization.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */; };
+		C0B6B6001EA81C2300ABDB2D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B6B5FF1EA81C2300ABDB2D /* Reachability.m */; };
 		C0C1A2821E9D465200AEA1E6 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C1A2811E9D465200AEA1E6 /* EventTableViewCell.m */; };
 		C0C1A2851E9D654400AEA1E6 /* EventSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C1A2841E9D654400AEA1E6 /* EventSplitViewController.m */; };
 		C0C1A2881E9D66A100AEA1E6 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C1A2871E9D66A100AEA1E6 /* EventDetailViewController.m */; };
 		C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */; };
-		C0F3DD591E9D334400AAC4E4 /* Event+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD461E9D334400AAC4E4 /* Event+CoreDataClass.m */; };
-		C0F3DD5A1E9D334400AAC4E4 /* Event+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD481E9D334400AAC4E4 /* Event+CoreDataProperties.m */; };
-		C0F3DD5B1E9D334400AAC4E4 /* EventGroup+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD4A1E9D334400AAC4E4 /* EventGroup+CoreDataClass.m */; };
-		C0F3DD5C1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD4C1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.m */; };
-		C0F3DD5D1E9D334400AAC4E4 /* Student+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD4E1E9D334400AAC4E4 /* Student+CoreDataClass.m */; };
-		C0F3DD5E1E9D334400AAC4E4 /* Student+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD501E9D334400AAC4E4 /* Student+CoreDataProperties.m */; };
-		C0F3DD5F1E9D334400AAC4E4 /* EventRecord+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD521E9D334400AAC4E4 /* EventRecord+CoreDataClass.m */; };
-		C0F3DD601E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD541E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m */; };
-		C0F3DD611E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD561E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m */; };
-		C0F3DD621E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F3DD581E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m */; };
 		C0F596191E9D97DC00408D9F /* AboutTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F596181E9D97DC00408D9F /* AboutTableTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9679EA3243DBFA67F24861CC /* Pods_Fredit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fredit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D393D0D764146B1DC3F59A6 /* Pods-Fredit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.debug.xcconfig"; sourceTree = "<group>"; };
+		C0080B201EA823FE00F62458 /* EventGroup+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventGroup+CoreDataClass.h"; sourceTree = "<group>"; };
+		C0080B211EA823FE00F62458 /* EventGroup+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventGroup+CoreDataClass.m"; sourceTree = "<group>"; };
+		C0080B221EA823FE00F62458 /* EventGroup+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventGroup+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C0080B231EA823FE00F62458 /* EventGroup+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventGroup+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C0080B241EA823FE00F62458 /* SignUpSheet+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignUpSheet+CoreDataClass.h"; sourceTree = "<group>"; };
+		C0080B251EA823FE00F62458 /* SignUpSheet+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SignUpSheet+CoreDataClass.m"; sourceTree = "<group>"; };
+		C0080B261EA823FE00F62458 /* SignUpSheet+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignUpSheet+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C0080B271EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SignUpSheet+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C0080B281EA823FE00F62458 /* Student+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Student+CoreDataClass.h"; sourceTree = "<group>"; };
+		C0080B291EA823FE00F62458 /* Student+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Student+CoreDataClass.m"; sourceTree = "<group>"; };
+		C0080B2A1EA823FE00F62458 /* Student+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Student+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C0080B2B1EA823FE00F62458 /* Student+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Student+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C0080B2C1EA823FE00F62458 /* EventRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventRecord+CoreDataClass.h"; sourceTree = "<group>"; };
+		C0080B2D1EA823FE00F62458 /* EventRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventRecord+CoreDataClass.m"; sourceTree = "<group>"; };
+		C0080B2E1EA823FE00F62458 /* EventRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C0080B2F1EA823FE00F62458 /* EventRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
+		C0080B301EA823FE00F62458 /* Event+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CoreDataClass.h"; sourceTree = "<group>"; };
+		C0080B311EA823FE00F62458 /* Event+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CoreDataClass.m"; sourceTree = "<group>"; };
+		C0080B321EA823FE00F62458 /* Event+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C0080B331EA823FE00F62458 /* Event+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C0483C2F1E9CF1D400B0B2C0 /* EventMasterTVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMasterTVController.h; sourceTree = "<group>"; };
 		C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMasterTVController.m; sourceTree = "<group>"; };
 		C04A27CB1EA1C8C3003377B9 /* EventDetailEditingTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailEditingTVC.h; sourceTree = "<group>"; };
@@ -64,6 +86,10 @@
 		C08379AB1EA2764100206B83 /* NSDate+Rounding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Rounding.m"; sourceTree = "<group>"; };
 		C08379AE1EA27FFE00206B83 /* FreditDataAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditDataAccessObject.h; sourceTree = "<group>"; };
 		C08379AF1EA27FFE00206B83 /* FreditDataAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditDataAccessObject.m; sourceTree = "<group>"; };
+		C0B6B5FA1EA8175E00ABDB2D /* CoreDataSyncorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataSyncorization.h; sourceTree = "<group>"; };
+		C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataSyncorization.m; sourceTree = "<group>"; };
+		C0B6B5FE1EA81C2300ABDB2D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		C0B6B5FF1EA81C2300ABDB2D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		C0C1A2801E9D465200AEA1E6 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewCell.h; sourceTree = "<group>"; };
 		C0C1A2811E9D465200AEA1E6 /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewCell.m; sourceTree = "<group>"; };
 		C0C1A2831E9D654400AEA1E6 /* EventSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSplitViewController.h; sourceTree = "<group>"; };
@@ -72,26 +98,6 @@
 		C0C1A2871E9D66A100AEA1E6 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditAPI.h; sourceTree = "<group>"; };
 		C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditAPI.m; sourceTree = "<group>"; };
-		C0F3DD451E9D334400AAC4E4 /* Event+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CoreDataClass.h"; sourceTree = "<group>"; };
-		C0F3DD461E9D334400AAC4E4 /* Event+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CoreDataClass.m"; sourceTree = "<group>"; };
-		C0F3DD471E9D334400AAC4E4 /* Event+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0F3DD481E9D334400AAC4E4 /* Event+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0F3DD491E9D334400AAC4E4 /* EventGroup+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventGroup+CoreDataClass.h"; sourceTree = "<group>"; };
-		C0F3DD4A1E9D334400AAC4E4 /* EventGroup+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventGroup+CoreDataClass.m"; sourceTree = "<group>"; };
-		C0F3DD4B1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventGroup+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0F3DD4C1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventGroup+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0F3DD4D1E9D334400AAC4E4 /* Student+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Student+CoreDataClass.h"; sourceTree = "<group>"; };
-		C0F3DD4E1E9D334400AAC4E4 /* Student+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Student+CoreDataClass.m"; sourceTree = "<group>"; };
-		C0F3DD4F1E9D334400AAC4E4 /* Student+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Student+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0F3DD501E9D334400AAC4E4 /* Student+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Student+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0F3DD511E9D334400AAC4E4 /* EventRecord+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventRecord+CoreDataClass.h"; sourceTree = "<group>"; };
-		C0F3DD521E9D334400AAC4E4 /* EventRecord+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventRecord+CoreDataClass.m"; sourceTree = "<group>"; };
-		C0F3DD531E9D334400AAC4E4 /* EventRecord+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EventRecord+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0F3DD541E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EventRecord+CoreDataProperties.m"; sourceTree = "<group>"; };
-		C0F3DD551E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignUpSheet+CoreDataClass.h"; sourceTree = "<group>"; };
-		C0F3DD561E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SignUpSheet+CoreDataClass.m"; sourceTree = "<group>"; };
-		C0F3DD571E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SignUpSheet+CoreDataProperties.h"; sourceTree = "<group>"; };
-		C0F3DD581E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SignUpSheet+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C0F596171E9D97DC00408D9F /* AboutTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTableTableViewController.h; sourceTree = "<group>"; };
 		C0F596181E9D97DC00408D9F /* AboutTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTableTableViewController.m; sourceTree = "<group>"; };
 		D9F7ECC956248731A5A11513 /* Pods-Fredit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fredit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fredit/Pods-Fredit.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 		C07926EB1E9C576E005C0680 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C0B6B5FD1EA81C0D00ABDB2D /* Reachability */,
 				C07926FF1E9C576E005C0680 /* Info.plist */,
 				C07926FC1E9C576E005C0680 /* LaunchScreen.storyboard */,
 				C07926FA1E9C576E005C0680 /* Assets.xcassets */,
@@ -207,6 +214,7 @@
 		C08379AD1EA27FD300206B83 /* FredtiAPIs */ = {
 			isa = PBXGroup;
 			children = (
+				C0B6B5F91EA8173100ABDB2D /* Data */,
 				C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */,
 				C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */,
 				C08379AE1EA27FFE00206B83 /* FreditDataAccessObject.h */,
@@ -215,29 +223,47 @@
 			name = FredtiAPIs;
 			sourceTree = "<group>";
 		};
+		C0B6B5F91EA8173100ABDB2D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C0B6B5FA1EA8175E00ABDB2D /* CoreDataSyncorization.h */,
+				C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		C0B6B5FD1EA81C0D00ABDB2D /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				C0B6B5FE1EA81C2300ABDB2D /* Reachability.h */,
+				C0B6B5FF1EA81C2300ABDB2D /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		C0F3DD2F1E9D2A1300AAC4E4 /* Datamodel */ = {
 			isa = PBXGroup;
 			children = (
-				C0F3DD451E9D334400AAC4E4 /* Event+CoreDataClass.h */,
-				C0F3DD461E9D334400AAC4E4 /* Event+CoreDataClass.m */,
-				C0F3DD471E9D334400AAC4E4 /* Event+CoreDataProperties.h */,
-				C0F3DD481E9D334400AAC4E4 /* Event+CoreDataProperties.m */,
-				C0F3DD491E9D334400AAC4E4 /* EventGroup+CoreDataClass.h */,
-				C0F3DD4A1E9D334400AAC4E4 /* EventGroup+CoreDataClass.m */,
-				C0F3DD4B1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.h */,
-				C0F3DD4C1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.m */,
-				C0F3DD4D1E9D334400AAC4E4 /* Student+CoreDataClass.h */,
-				C0F3DD4E1E9D334400AAC4E4 /* Student+CoreDataClass.m */,
-				C0F3DD4F1E9D334400AAC4E4 /* Student+CoreDataProperties.h */,
-				C0F3DD501E9D334400AAC4E4 /* Student+CoreDataProperties.m */,
-				C0F3DD511E9D334400AAC4E4 /* EventRecord+CoreDataClass.h */,
-				C0F3DD521E9D334400AAC4E4 /* EventRecord+CoreDataClass.m */,
-				C0F3DD531E9D334400AAC4E4 /* EventRecord+CoreDataProperties.h */,
-				C0F3DD541E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m */,
-				C0F3DD551E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.h */,
-				C0F3DD561E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m */,
-				C0F3DD571E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.h */,
-				C0F3DD581E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m */,
+				C0080B201EA823FE00F62458 /* EventGroup+CoreDataClass.h */,
+				C0080B211EA823FE00F62458 /* EventGroup+CoreDataClass.m */,
+				C0080B221EA823FE00F62458 /* EventGroup+CoreDataProperties.h */,
+				C0080B231EA823FE00F62458 /* EventGroup+CoreDataProperties.m */,
+				C0080B241EA823FE00F62458 /* SignUpSheet+CoreDataClass.h */,
+				C0080B251EA823FE00F62458 /* SignUpSheet+CoreDataClass.m */,
+				C0080B261EA823FE00F62458 /* SignUpSheet+CoreDataProperties.h */,
+				C0080B271EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m */,
+				C0080B281EA823FE00F62458 /* Student+CoreDataClass.h */,
+				C0080B291EA823FE00F62458 /* Student+CoreDataClass.m */,
+				C0080B2A1EA823FE00F62458 /* Student+CoreDataProperties.h */,
+				C0080B2B1EA823FE00F62458 /* Student+CoreDataProperties.m */,
+				C0080B2C1EA823FE00F62458 /* EventRecord+CoreDataClass.h */,
+				C0080B2D1EA823FE00F62458 /* EventRecord+CoreDataClass.m */,
+				C0080B2E1EA823FE00F62458 /* EventRecord+CoreDataProperties.h */,
+				C0080B2F1EA823FE00F62458 /* EventRecord+CoreDataProperties.m */,
+				C0080B301EA823FE00F62458 /* Event+CoreDataClass.h */,
+				C0080B311EA823FE00F62458 /* Event+CoreDataClass.m */,
+				C0080B321EA823FE00F62458 /* Event+CoreDataProperties.h */,
+				C0080B331EA823FE00F62458 /* Event+CoreDataProperties.m */,
 			);
 			name = Datamodel;
 			sourceTree = "<group>";
@@ -382,30 +408,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0080B341EA823FE00F62458 /* EventGroup+CoreDataClass.m in Sources */,
+				C0080B371EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m in Sources */,
+				C0080B3D1EA823FE00F62458 /* Event+CoreDataProperties.m in Sources */,
 				C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */,
 				C0F596191E9D97DC00408D9F /* AboutTableTableViewController.m in Sources */,
-				C0F3DD621E9D334400AAC4E4 /* SignUpSheet+CoreDataProperties.m in Sources */,
+				C0080B3C1EA823FE00F62458 /* Event+CoreDataClass.m in Sources */,
 				C0C1A2821E9D465200AEA1E6 /* EventTableViewCell.m in Sources */,
 				C08379AC1EA2764100206B83 /* NSDate+Rounding.m in Sources */,
-				C0F3DD5D1E9D334400AAC4E4 /* Student+CoreDataClass.m in Sources */,
+				C0080B361EA823FE00F62458 /* SignUpSheet+CoreDataClass.m in Sources */,
 				C04A27D01EA1CC5B003377B9 /* UIColor+ColorFromRGB.m in Sources */,
-				C0F3DD601E9D334400AAC4E4 /* EventRecord+CoreDataProperties.m in Sources */,
-				C0F3DD5E1E9D334400AAC4E4 /* Student+CoreDataProperties.m in Sources */,
+				C0B6B5FC1EA8175E00ABDB2D /* CoreDataSyncorization.m in Sources */,
 				C0C1A2881E9D66A100AEA1E6 /* EventDetailViewController.m in Sources */,
 				C07927081E9C594D005C0680 /* UIView+RoundCornerUIView.m in Sources */,
-				C0F3DD5A1E9D334400AAC4E4 /* Event+CoreDataProperties.m in Sources */,
-				C0F3DD5C1E9D334400AAC4E4 /* EventGroup+CoreDataProperties.m in Sources */,
+				C0080B3A1EA823FE00F62458 /* EventRecord+CoreDataClass.m in Sources */,
+				C0080B3B1EA823FE00F62458 /* EventRecord+CoreDataProperties.m in Sources */,
 				C07926F31E9C576E005C0680 /* LoginViewController.m in Sources */,
+				C0080B391EA823FE00F62458 /* Student+CoreDataProperties.m in Sources */,
 				C04A27CD1EA1C8C3003377B9 /* EventDetailEditingTVC.m in Sources */,
 				C07926F91E9C576E005C0680 /* Fredit.xcdatamodeld in Sources */,
-				C0F3DD611E9D334400AAC4E4 /* SignUpSheet+CoreDataClass.m in Sources */,
 				C07926F01E9C576E005C0680 /* AppDelegate.m in Sources */,
+				C0080B381EA823FE00F62458 /* Student+CoreDataClass.m in Sources */,
 				C08379B01EA27FFE00206B83 /* FreditDataAccessObject.m in Sources */,
 				C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */,
-				C0F3DD591E9D334400AAC4E4 /* Event+CoreDataClass.m in Sources */,
-				C0F3DD5B1E9D334400AAC4E4 /* EventGroup+CoreDataClass.m in Sources */,
 				C07926ED1E9C576E005C0680 /* main.m in Sources */,
-				C0F3DD5F1E9D334400AAC4E4 /* EventRecord+CoreDataClass.m in Sources */,
+				C0B6B6001EA81C2300ABDB2D /* Reachability.m in Sources */,
+				C0080B351EA823FE00F62458 /* EventGroup+CoreDataProperties.m in Sources */,
 				C0C1A2851E9D654400AEA1E6 /* EventSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
