@@ -50,8 +50,7 @@
     }
     
     if (shouldUpdate) {
-        [self attemptFullSyncorization:^{
-        }];
+        [self attemptFullSyncorization:nil];
     }
 }
 
@@ -68,7 +67,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             if ([[FreditAPI sharedInstance]isAuthenticated]) {
                 // Update modified
-                NSManagedObjectContext* ctx = [[self cdContainer]viewContext];
+                NSManagedObjectContext* ctx = [[self cdContainer]newBackgroundContext];
                 
                 [ctx performBlockAndWait:^{
                     // Process Event Changes
@@ -111,12 +110,14 @@
             self.isSyncing = false;
             dispatch_sync(dispatch_get_main_queue(), ^{
                 NSLog(@"Sync Complete");
-                complete();
+                if (complete)
+                    complete();
             });
         });
     } else {
         NSLog(@"A Conflict Sync detected. Aborting");
-        complete();
+        if (complete)
+            complete();
     }
 }
 
@@ -165,6 +166,7 @@
             //Save Data
             [context save:nil];
             [[[self cdContainer]viewContext]performBlockAndWait:^{
+                [[[self cdContainer]viewContext]refreshAllObjects];
                 [[[self cdContainer]viewContext]save:nil];
             }];
         }];
