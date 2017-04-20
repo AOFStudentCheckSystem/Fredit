@@ -34,19 +34,12 @@
     return context;
 }
 
-- (NSManagedObjectContext *)asyncManagedObjectContext {
-    NSManagedObjectContext *context = nil;
-    AppDelegate* delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    context = [[delegate persistentContainer] newBackgroundContext];
-    return context;
-}
-
 - (void)initializeFetchedResultsController
 {
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     
     request.entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:[self managedObjectContext]];
-    
+    request.predicate = [NSPredicate predicateWithFormat:@"changed >= 0"];
     NSSortDescriptor *eventTimeAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventTime" ascending:NO];
     
     [request setSortDescriptors:@[eventTimeAscSort]];
@@ -91,11 +84,6 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 - (void) reloadData {
-//    if (self.refreshControl && !self.refreshControl.refreshing) {
-////        self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
-//        [[self tableView]setContentOffset:CGPointMake(0, -self.tableView.contentInset.top) animated:true];
-//        [self.refreshControl beginRefreshing];
-//    }
     if (self.refreshControl && !self.isUpdating) {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -160,15 +148,10 @@
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"Remove Event" message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* delAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [SVProgressHUD showWithStatus:@"Removing..."];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                if ([[FreditAPI sharedInstance] removeEvent:[(Event*)[[self fetchedResultsController] objectAtIndexPath:[self.tableView indexPathForCell:cell]] eventId]]) {
-                    [self reloadData];
-                } else {
-                    [SVProgressHUD dismiss];
-                    [SVProgressHUD showErrorWithStatus:@"Error Occoured!"];
-                }
-            });
+            if ([[FreditAPI sharedInstance]isAuthenticated]) {
+                [(Event*)[[self fetchedResultsController] objectAtIndexPath:[self.tableView indexPathForCell:cell]] setChanged:-1];
+                [[self managedObjectContext]save:nil];
+            }
         }];
         UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self setEditing:false animated:true];
@@ -231,36 +214,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [[self tableView] endUpdates];
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.isUpdating) {
-        return;
-    }
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here for when you hit delete
-        UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"Remove Event" message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* delAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [SVProgressHUD showWithStatus:@"Removing..."];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                if ([[FreditAPI sharedInstance] removeEvent:[(Event*)[[self fetchedResultsController] objectAtIndexPath:indexPath] eventId]]) {
-                    [self reloadData];
-                } else {
-                    [SVProgressHUD dismiss];
-                    [SVProgressHUD showErrorWithStatus:@"Error Occoured!"];
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setEditing:false animated:true];
-                });
-            });
-        }];
-        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self setEditing:false animated:true];
-        }];
-        [controller addAction: delAction];
-        [controller addAction: cancelAction];
-        [self presentViewController:controller animated:YES completion:nil];
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

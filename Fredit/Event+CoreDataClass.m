@@ -34,7 +34,9 @@
             return (Event *)[result objectAtIndex:0];
         } else {
             NSLog(@"create new MO");
-            return (Event *)[NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
+            Event* newEvent = (Event *)[NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:context];
+            newEvent.changed = 1;
+            return newEvent;
         }
     }
     return nil;

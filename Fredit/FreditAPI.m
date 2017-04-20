@@ -99,6 +99,18 @@ NSString* rootURL = @"https://api.aofactivities.com/";
     return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
 }
 
+- (BOOL) creditEvent: (Event*) event
+{
+    NSDictionary* params = @{@"eventId":event.eventId, @"name":event.eventName, @"time":[NSString stringWithFormat:@"%li",((long)floor(event.eventTime.timeIntervalSince1970 * 1000))], @"description":event.eventDescription};
+    [UNIRest timeout: 10];
+    UNIHTTPJsonResponse* r = [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
+        simpleRequest.url = [rootURL stringByAppendingString:@"event/credit"];
+        simpleRequest.headers = [self getHeaders];
+        simpleRequest.parameters = params;
+    }] asJson];
+    return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
+}
+
 - (BOOL) creditEventWithId: (NSString*) eventId andEventName: (NSString*) name andTime: (NSDate*) time andDescription: (NSString*) description
 {
     NSDictionary* params = @{@"eventId":eventId, @"name":name, @"time":[NSString stringWithFormat:@"%li",((long)floor(time.timeIntervalSince1970 * 1000))], @"description":description};

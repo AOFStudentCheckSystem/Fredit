@@ -42,6 +42,9 @@
             if (![event.eventDescription isEqualToString:newDescription]) {
                 event.eventDescription = newDescription;
             }
+            if (event.changed != 0) {
+                event.changed = 0;
+            }
         }
         //Remove outdate events
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];

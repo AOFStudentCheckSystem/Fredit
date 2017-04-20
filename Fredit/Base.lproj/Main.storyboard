@@ -406,7 +406,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FIJ-Lb-WCn">
-                                                    <rect key="frame" x="-2" y="0.0" width="374" height="216"/>
+                                                    <rect key="frame" x="-2" y="0.0" width="373" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="513917605.91693401">
                                                         <!--2017-04-15 02:53:25 +0000-->

@@ -12,6 +12,6 @@
 
 + (instancetype)sharedSyncorization;
 
-- (void)attemptFullSyncorization;
+- (void) attemptFullSyncorization: (void (^)())complete ;
 
 @end
