@@ -21,6 +21,8 @@
 		C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0483C301E9CF1D400B0B2C0 /* EventMasterTVController.m */; };
 		C04A27CD1EA1C8C3003377B9 /* EventDetailEditingTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C04A27CC1EA1C8C3003377B9 /* EventDetailEditingTVC.m */; };
 		C04A27D01EA1CC5B003377B9 /* UIColor+ColorFromRGB.m in Sources */ = {isa = PBXBuildFile; fileRef = C04A27CF1EA1CC5B003377B9 /* UIColor+ColorFromRGB.m */; };
+		C05F29701EA90243002458B7 /* TrackableObject+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C05F296D1EA90243002458B7 /* TrackableObject+CoreDataClass.m */; };
+		C05F29711EA90243002458B7 /* TrackableObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = C05F296F1EA90243002458B7 /* TrackableObject+CoreDataProperties.m */; };
 		C07926ED1E9C576E005C0680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C07926EC1E9C576E005C0680 /* main.m */; };
 		C07926F01E9C576E005C0680 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C07926EF1E9C576E005C0680 /* AppDelegate.m */; };
 		C07926F31E9C576E005C0680 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C07926F21E9C576E005C0680 /* LoginViewController.m */; };
@@ -69,6 +71,10 @@
 		C04A27CC1EA1C8C3003377B9 /* EventDetailEditingTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailEditingTVC.m; sourceTree = "<group>"; };
 		C04A27CE1EA1CC5B003377B9 /* UIColor+ColorFromRGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorFromRGB.h"; sourceTree = "<group>"; };
 		C04A27CF1EA1CC5B003377B9 /* UIColor+ColorFromRGB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorFromRGB.m"; sourceTree = "<group>"; };
+		C05F296C1EA90243002458B7 /* TrackableObject+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrackableObject+CoreDataClass.h"; sourceTree = "<group>"; };
+		C05F296D1EA90243002458B7 /* TrackableObject+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TrackableObject+CoreDataClass.m"; sourceTree = "<group>"; };
+		C05F296E1EA90243002458B7 /* TrackableObject+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrackableObject+CoreDataProperties.h"; sourceTree = "<group>"; };
+		C05F296F1EA90243002458B7 /* TrackableObject+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TrackableObject+CoreDataProperties.m"; sourceTree = "<group>"; };
 		C07926E81E9C576E005C0680 /* Fredit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fredit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C07926EC1E9C576E005C0680 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C07926EE1E9C576E005C0680 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -244,6 +250,10 @@
 		C0F3DD2F1E9D2A1300AAC4E4 /* Datamodel */ = {
 			isa = PBXGroup;
 			children = (
+				C05F296C1EA90243002458B7 /* TrackableObject+CoreDataClass.h */,
+				C05F296D1EA90243002458B7 /* TrackableObject+CoreDataClass.m */,
+				C05F296E1EA90243002458B7 /* TrackableObject+CoreDataProperties.h */,
+				C05F296F1EA90243002458B7 /* TrackableObject+CoreDataProperties.m */,
 				C0080B201EA823FE00F62458 /* EventGroup+CoreDataClass.h */,
 				C0080B211EA823FE00F62458 /* EventGroup+CoreDataClass.m */,
 				C0080B221EA823FE00F62458 /* EventGroup+CoreDataProperties.h */,
@@ -409,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0080B341EA823FE00F62458 /* EventGroup+CoreDataClass.m in Sources */,
+				C05F29711EA90243002458B7 /* TrackableObject+CoreDataProperties.m in Sources */,
 				C0080B371EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m in Sources */,
 				C0080B3D1EA823FE00F62458 /* Event+CoreDataProperties.m in Sources */,
 				C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */,
@@ -426,6 +437,7 @@
 				C07926F31E9C576E005C0680 /* LoginViewController.m in Sources */,
 				C0080B391EA823FE00F62458 /* Student+CoreDataProperties.m in Sources */,
 				C04A27CD1EA1C8C3003377B9 /* EventDetailEditingTVC.m in Sources */,
+				C05F29701EA90243002458B7 /* TrackableObject+CoreDataClass.m in Sources */,
 				C07926F91E9C576E005C0680 /* Fredit.xcdatamodeld in Sources */,
 				C07926F01E9C576E005C0680 /* AppDelegate.m in Sources */,
 				C0080B381EA823FE00F62458 /* Student+CoreDataClass.m in Sources */,

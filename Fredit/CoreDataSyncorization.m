@@ -44,7 +44,7 @@
             break;
         }
     }
-
+    
     if ([insertedObjects count] > 0) {
         shouldUpdate = true;
     }
@@ -70,21 +70,23 @@
                 NSManagedObjectContext* ctx = [[self cdContainer]newBackgroundContext];
                 
                 [ctx performBlockAndWait:^{
-                    // Process Event Changes
-                    NSEntityDescription* eventObjectDescription = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:ctx];
-                    // Event Removal
+                    // Process Changes
+                    NSEntityDescription* eventObjectDescription = [NSEntityDescription entityForName:@"TrackableObject" inManagedObjectContext:ctx];
+                    // Removal
                     NSFetchRequest* removedEvents = [[NSFetchRequest alloc]init];
                     removedEvents.entity = eventObjectDescription;
                     removedEvents.predicate = [NSPredicate predicateWithFormat:@"changed = -1"];
                     NSArray* removedEventList = [ctx executeFetchRequest:removedEvents error:nil];
                     int success = 0;
-                    for (Event * event in removedEventList) {
-                        if ([[FreditAPI sharedInstance]removeEvent:event.eventId]) {
-                            success ++;
+                    for (TrackableObject * trackable in removedEventList) {
+                        if ([trackable isKindOfClass:[Event class]]) {
+                            if ([[FreditAPI sharedInstance]removeEvent:((Event*)trackable).eventId]) {
+                                success ++;
+                            }
+                            [ctx deleteObject:trackable];
                         }
-                        [ctx deleteObject:event];
                     }
-                    NSLog(@"%i / %li of Event Deletion Succeed", success, [removedEventList count]);
+                    NSLog(@"%i / %li of Trackable Deletion Succeed", success, [removedEventList count]);
                     
                     // Event Update
                     NSFetchRequest* modifiedEvents = [[NSFetchRequest alloc]init];
@@ -92,18 +94,19 @@
                     modifiedEvents.entity = eventObjectDescription;
                     NSArray* changedEventList = [ctx executeFetchRequest:modifiedEvents error:nil];
                     success = 0;
-                    for (Event* event in changedEventList) {
-                        NSString* str = [[FreditAPI sharedInstance]creditEvent:event];
-                        if (str) {
-                            success ++;
-                            event.eventId = str;
-                            NSLog(@"event ID: %@",event.eventId);
-                        } else {
-                            [ctx deleteObject:event];
+                    for (TrackableObject* trackable in changedEventList) {
+                        if ([trackable isKindOfClass:[Event class]]) {
+                            NSString* str = [[FreditAPI sharedInstance]creditEvent:(Event*)trackable];
+                            if (str) {
+                                success ++;
+                                ((Event*)trackable).eventId = str;
+                            } else {
+                                [ctx deleteObject:trackable];
+                            }
                         }
                     }
                     [ctx save:nil];
-                    NSLog(@"%i / %li of Event Update Succeed", success, [changedEventList count]);
+                    NSLog(@"%i / %li of Trackable Update Succeed", success, [changedEventList count]);
                 }];
                 [self updateAllEventsFromServerInContext:ctx];
             }

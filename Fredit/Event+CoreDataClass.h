@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "TrackableObject+CoreDataClass.h"
 @class EventGroup, EventRecord;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Event : NSManagedObject
+@interface Event : TrackableObject
 
 +(instancetype)fetchOrCreateWithEventId:(NSString *)eventId inManagedObjectContext:(NSManagedObjectContext *)context;
 

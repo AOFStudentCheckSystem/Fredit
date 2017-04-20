@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Event" representedClassName="Event" syncable="YES">
-        <attribute name="changed" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    <entity name="Event" representedClassName="Event" parentEntity="TrackableObject" syncable="YES">
         <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,11 +36,15 @@
         <attribute name="preferredName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EventRecord" inverseName="student" inverseEntity="EventRecord" syncable="YES"/>
     </entity>
+    <entity name="TrackableObject" representedClassName="TrackableObject" isAbstract="YES" syncable="YES">
+        <attribute name="changed" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Event" positionX="-441" positionY="-125" width="128" height="163"/>
-        <element name="EventGroup" positionX="-234" positionY="-234" width="128" height="105"/>
-        <element name="EventRecord" positionX="-191" positionY="-27" width="128" height="120"/>
-        <element name="SignUpSheet" positionX="-38" positionY="-252" width="128" height="105"/>
-        <element name="Student" positionX="27" positionY="-117" width="128" height="135"/>
+        <element name="Event" positionX="-441" positionY="-125" width="128" height="148"/>
+        <element name="EventGroup" positionX="-234" positionY="-234" width="128" height="103"/>
+        <element name="EventRecord" positionX="-191" positionY="-27" width="128" height="118"/>
+        <element name="SignUpSheet" positionX="-38" positionY="-252" width="128" height="103"/>
+        <element name="Student" positionX="27" positionY="-117" width="128" height="133"/>
+        <element name="TrackableObject" positionX="-783" positionY="-234" width="128" height="58"/>
     </elements>
 </model>

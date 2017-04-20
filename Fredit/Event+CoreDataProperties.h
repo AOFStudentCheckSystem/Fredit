@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.h
 //  Fredit
 //
-//  Created by Codetector on 2017/4/19.
+//  Created by Codetector on 2017/4/20.
 //  Copyright © 2017年 GuardianTechnologies. All rights reserved.
 //
 
@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Event *> *)fetchRequest;
 
-@property (nonatomic) int16_t changed;
 @property (nullable, nonatomic, copy) NSString *eventDescription;
 @property (nullable, nonatomic, copy) NSString *eventId;
 @property (nullable, nonatomic, copy) NSString *eventName;
