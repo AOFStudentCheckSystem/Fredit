@@ -9,9 +9,9 @@
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
 #import "CoreDataSyncorization.h"
-
+#import "Reachability.h"
 @interface AppDelegate ()
-
+@property (strong, nonatomic) Reachability *hostReachability;
 @end
 
 @implementation AppDelegate
@@ -20,6 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[CoreDataSyncorization sharedSyncorization]attemptFullSyncorization:nil];
     // Override point for customization after application launch.
+    
+    self.hostReachability = [Reachability reachabilityWithHostName:@"api.aofactivities.com"];
+    [self.hostReachability startNotifier];
     return YES;
 }
 
@@ -28,6 +31,7 @@
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     [self saveContext];
+    [self.hostReachability stopNotifier];
 }
 
 
@@ -39,6 +43,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [self.hostReachability startNotifier];
 }
 
 
