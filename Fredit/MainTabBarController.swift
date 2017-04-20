@@ -23,7 +23,7 @@ class MainTabBarController: UITabBarController {
     
     func networkStatusChanged(n: Notification) {
         if n.object is Reachability {
-            NSLog("%@", (n.object as! Reachability).currentReachabilityStatus())
+            NSLog("%i", (n.object as! Reachability).currentReachabilityStatus().rawValue)
         }
     }
     

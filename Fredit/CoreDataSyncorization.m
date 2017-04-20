@@ -65,10 +65,9 @@
         NSLog(@"Syncorization Began");
         self.isSyncing = true;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSManagedObjectContext* ctx = [[self cdContainer]newBackgroundContext];
             if ([[FreditAPI sharedInstance]isAuthenticated]) {
                 // Update modified
-                NSManagedObjectContext* ctx = [[self cdContainer]newBackgroundContext];
-                
                 [ctx performBlockAndWait:^{
                     // Process Changes
                     NSEntityDescription* eventObjectDescription = [NSEntityDescription entityForName:@"TrackableObject" inManagedObjectContext:ctx];
@@ -86,7 +85,7 @@
                             [ctx deleteObject:trackable];
                         }
                     }
-                    NSLog(@"%i / %li of Trackable Deletion Succeed", success, [removedEventList count]);
+                    NSLog(@"%i / %ul of Trackable Deletion Succeed", success, [removedEventList count]);
                     
                     // Event Update
                     NSFetchRequest* modifiedEvents = [[NSFetchRequest alloc]init];
@@ -106,10 +105,10 @@
                         }
                     }
                     [ctx save:nil];
-                    NSLog(@"%i / %li of Trackable Update Succeed", success, [changedEventList count]);
+                    NSLog(@"%i / %ul of Trackable Update Succeed", success, [changedEventList count]);
                 }];
-                [self updateAllEventsFromServerInContext:ctx];
             }
+            [self updateAllEventsFromServerInContext: ctx];
             self.isSyncing = false;
             dispatch_sync(dispatch_get_main_queue(), ^{
                 NSLog(@"Sync Complete");
