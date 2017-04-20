@@ -7,6 +7,7 @@
 //
 
 #import "EventMasterTVController.h"
+#import "CoreDataSyncorization.h"
 #import "UNIRest.h"
 #import <CoreData/CoreData.h>
 #import "FreditAPI.h"
@@ -85,28 +86,32 @@
 }
 - (void) reloadData {
     if (self.refreshControl && !self.isUpdating) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            self.isUpdating = true;
-            NSManagedObjectContext* context = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-            [context setParentContext:[self managedObjectContext]];
-            [context performBlockAndWait:^{
-                [FreditDataAccessObject updateAllEventsFromServerInContext:context];
-                [[self managedObjectContext]save:nil];
-            }];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateFormat:@"MMM d, h:mm a"];
-                NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-                NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                            forKey:NSForegroundColorAttributeName];
-                NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-                self.refreshControl.attributedTitle = attributedTitle;
-                [self.refreshControl endRefreshing];
-                [SVProgressHUD dismiss];
-                self.isUpdating = false;
-            });
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//            self.isUpdating = true;
+//            NSManagedObjectContext* context = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+//            [context setParentContext:[self managedObjectContext]];
+//            [context performBlockAndWait:^{
+//                [FreditDataAccessObject updateAllEventsFromServerInContext:context];
+//                [[self managedObjectContext]save:nil];
+//            }];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//                [formatter setDateFormat:@"MMM d, h:mm a"];
+//                NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+//                NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+//                                                                            forKey:NSForegroundColorAttributeName];
+//                NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+//                self.refreshControl.attributedTitle = attributedTitle;
+//                [self.refreshControl endRefreshing];
+//                [SVProgressHUD dismiss];
+//                self.isUpdating = false;
+//            });
+//        });
+        self.isUpdating = true;
+        [[CoreDataSyncorization sharedSyncorization]attemptFullSyncorization:^{
+            [self.refreshControl endRefreshing];
+            self.isUpdating = false;
+        }];
     } else if(self.refreshControl) {
         [self.refreshControl endRefreshing];
     }

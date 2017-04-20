@@ -75,17 +75,18 @@ bool isDatetimeEditing = false;
     if ([self.eventNameTextField.text isEqualToString:@""]) {
         return;
     }
-    [SVProgressHUD showWithStatus:@"Saving..."];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSString* eventID = self.targetEvent ? self.targetEvent.eventId : @"";
-        
-        [[FreditAPI sharedInstance]creditEventWithId:eventID andEventName:self.eventNameTextField.text andTime:self.eventDate andDescription:self.eventDetailText.text];
-        [FreditDataAccessObject updateAllEventsFromServerInContext:[self managedObjectContext]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [self dismissViewControllerAnimated:true completion:nil];
-        });
-    });
+    if (!self.targetEvent) {
+        self.targetEvent = [NSEntityDescription insertNewObjectForEntityForName:@"Event" inManagedObjectContext:[self managedObjectContext]];
+        self.targetEvent.eventId = @"";
+    }
+    
+    self.targetEvent.eventName = self.eventNameTextField.text;
+    self.targetEvent.eventTime = self.eventDate;
+    self.targetEvent.eventDescription = self.eventDetailText.text;
+    self.targetEvent.changed = 1;
+    [[self managedObjectContext] save:nil];
+    
+    [self dismissViewControllerAnimated:true completion:nil];
     
 }
 

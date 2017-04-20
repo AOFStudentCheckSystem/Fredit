@@ -51,7 +51,6 @@
     
     if (shouldUpdate) {
         [self attemptFullSyncorization:^{
-            NSLog(@"Sync Complete");
         }];
     }
 }
@@ -69,8 +68,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             if ([[FreditAPI sharedInstance]isAuthenticated]) {
                 // Update modified
-                NSManagedObjectContext* ctx = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-                ctx.persistentStoreCoordinator = [self cdContainer].persistentStoreCoordinator;
+                NSManagedObjectContext* ctx = [[self cdContainer]viewContext];
                 
                 [ctx performBlockAndWait:^{
                     // Process Event Changes
@@ -96,23 +94,80 @@
                     NSArray* changedEventList = [ctx executeFetchRequest:modifiedEvents error:nil];
                     success = 0;
                     for (Event* event in changedEventList) {
-                        [[FreditAPI sharedInstance]creditEvent:event];
+                        NSString* str = [[FreditAPI sharedInstance]creditEvent:event];
+                        if (str) {
+                            success ++;
+                            event.eventId = str;
+                            NSLog(@"event ID: %@",event.eventId);
+                        } else {
+                            [ctx deleteObject:event];
+                        }
                     }
-                    NSLog(@"%i / %li of Event Update Succeed", success, [changedEventList count]);
                     [ctx save:nil];
+                    NSLog(@"%i / %li of Event Update Succeed", success, [changedEventList count]);
                 }];
-                
-                self.isSyncing = false;
-            } else {
-                // Release lock if sync failed
-                self.isSyncing = false;
+                [self updateAllEventsFromServerInContext:ctx];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
+            self.isSyncing = false;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                NSLog(@"Sync Complete");
                 complete();
             });
         });
     } else {
+        NSLog(@"A Conflict Sync detected. Aborting");
         complete();
+    }
+}
+
+- (void) updateAllEventsFromServerInContext:(NSManagedObjectContext *)context {
+    NSDictionary* data = [[FreditAPI sharedInstance] listAllEvents];
+    if (data != nil) {
+        NSMutableArray* eventIds = [[NSMutableArray alloc]init];
+        //Add new Events
+        [context performBlockAndWait:^{
+            for (NSDictionary* dict in (NSArray *)[data objectForKey:@"content"]) {
+                Event* event = [Event fetchOrCreateWithEventId:[dict objectForKey:@"eventId"] inManagedObjectContext: context];
+                NSString* eventId = [dict objectForKey:@"eventId"];
+                [eventIds addObject: eventId];
+                //Update event obj
+                if (![event.eventId isEqualToString:eventId]) {
+                    [event setEventId:eventId];
+                }
+                NSDate* newDate = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000];
+                if (![event.eventTime isEqualToDate:newDate]) {
+                    [event setEventTime:[NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"eventTime"] longValue] / 1000]];
+                }
+                int newStatus = [[dict objectForKey:@"eventStatus"]intValue];
+                if (event.eventStatus != newStatus) {
+                    event.eventStatus = newStatus;
+                }
+                NSString* newName = [dict objectForKey:@"eventName"];
+                if (![event.eventName isEqualToString:newName]) {
+                    event.eventName = newName;
+                }
+                NSString* newDescription = [dict objectForKey:@"eventDescription"];
+                if (![event.eventDescription isEqualToString:newDescription]) {
+                    event.eventDescription = newDescription;
+                }
+                if (event.changed != 0) {
+                    event.changed = 0;
+                }
+            }
+            //Remove outdate events
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Event"];
+            [request setPredicate:[NSPredicate predicateWithFormat:@"NOT (eventId in %@)" argumentArray:@[eventIds]]];
+            NSArray* delArray = [context executeFetchRequest:request error:nil];
+            for (NSManagedObject* obj in delArray) {
+                [context deleteObject:obj];
+                NSLog(@"Removing %@", [(Event*)obj eventName]);
+            }
+            //Save Data
+            [context save:nil];
+            [[[self cdContainer]viewContext]performBlockAndWait:^{
+                [[[self cdContainer]viewContext]save:nil];
+            }];
+        }];
     }
 }
 

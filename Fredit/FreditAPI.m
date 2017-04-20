@@ -94,12 +94,14 @@ NSString* rootURL = @"https://api.aofactivities.com/";
     [UNIRest timeout: 10];
     UNIHTTPJsonResponse* r = [[UNIRest delete:^(UNISimpleRequest *simpleRequest) {
         simpleRequest.url = [[rootURL stringByAppendingString:@"event/remove/"] stringByAppendingString:eventId];
+        NSLog(@"Event Deletion API Sent with URL=%@",simpleRequest.url);
         simpleRequest.headers = [self getHeaders];
     }] asJson];
     return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
 }
 
-- (BOOL) creditEvent: (Event*) event
+
+- (NSString *) creditEvent: (Event*) event
 {
     NSDictionary* params = @{@"eventId":event.eventId, @"name":event.eventName, @"time":[NSString stringWithFormat:@"%li",((long)floor(event.eventTime.timeIntervalSince1970 * 1000))], @"description":event.eventDescription};
     [UNIRest timeout: 10];
@@ -108,7 +110,11 @@ NSString* rootURL = @"https://api.aofactivities.com/";
         simpleRequest.headers = [self getHeaders];
         simpleRequest.parameters = params;
     }] asJson];
-    return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
+    if (r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue]) {
+        return [[[[r body] JSONObject]objectForKey:@"event"] objectForKey:@"eventId"];
+    } else {
+        return nil;
+    }
 }
 
 - (BOOL) creditEventWithId: (NSString*) eventId andEventName: (NSString*) name andTime: (NSDate*) time andDescription: (NSString*) description

@@ -45,6 +45,7 @@
     if (self.baseEvent) {
         for (NSManagedObject* obj in updatedObjects) {
             if ([obj.objectID isEqual:self.baseEvent.objectID]) {
+                self.hoverView.hidden = ((Event*)obj).changed >= 0;
                 self.baseEvent = (Event*)obj;
                 [self updateviewAccordingToBaseEvent];
                 return;

@@ -25,7 +25,7 @@ extern const NSString* rootURL;
 
 - (void) signOut;
 
-- (BOOL) creditEvent: (Event*) event;
+- (NSString *) creditEvent: (Event*) event;
 
 - (BOOL) creditEventWithId: (NSString*) eventId andEventName: (NSString*) name andTime: (NSDate*) time andDescription: (NSString*) description;
 
