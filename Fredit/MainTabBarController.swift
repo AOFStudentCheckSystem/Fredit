@@ -9,6 +9,7 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,7 @@ class MainTabBarController: UITabBarController {
     
     func networkStatusChanged(n: Notification) {
         if n.object is Reachability {
-            NSLog("%i", (n.object as! Reachability).currentReachabilityStatus().rawValue)
+            NSLog("Reachable: %i", (n.object as! Reachability).currentReachabilityStatus().rawValue)
         }
     }
     

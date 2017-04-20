@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Fredit
+
+  Created by Codetector on 2017/4/20.
+  Copyright © 2017年 GuardianTechnologies. All rights reserved.
+*/
+"EVENT_STATUS_FUTURE" = "Future";
+"EVENT_STATUS_BOARDING" = "Boarding";
+"EVENT_STATUS_COMPLETE" = "Complete";
+"EVENT_STATUS_UNKNOWN" = "Unknown";

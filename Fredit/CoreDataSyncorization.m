@@ -12,6 +12,7 @@
 #import "Event+CoreDataClass.h"
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Reachability.h"
 
 @interface CoreDataSyncorization()
 
@@ -29,9 +30,22 @@
         sharedInstance = [[CoreDataSyncorization alloc] init];
         sharedInstance.isSyncing = false;
         [[NSNotificationCenter defaultCenter] addObserver:sharedInstance selector:@selector(onCoreDataStoreChanged:) name:NSManagedObjectContextDidSaveNotification object:[sharedInstance cdContainer].viewContext];
+        [[NSNotificationCenter defaultCenter]addObserver:sharedInstance selector:@selector(networkStatusChange:) name:kReachabilityChangedNotification object:nil];
         // Do any other initialisation stuff here
     });
     return sharedInstance;
+}
+
+- (int)currentNetworkStatus {
+    return ((AppDelegate*)[[UIApplication sharedApplication] delegate]).hostReachability.currentReachabilityStatus;
+}
+
+- (void)networkStatusChange: (NSNotification*)n {
+    if ([n.object isKindOfClass:[Reachability class]]) {
+        if (((Reachability*)n.object).currentReachabilityStatus > 0 ) {
+            [self attemptFullSyncorization:nil];
+        }
+    }
 }
 
 - (void)onCoreDataStoreChanged: (NSNotification*) changedNotification {
@@ -65,8 +79,8 @@
         NSLog(@"Syncorization Began");
         self.isSyncing = true;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSManagedObjectContext* ctx = [[self cdContainer]newBackgroundContext];
-            if ([[FreditAPI sharedInstance]isAuthenticated]) {
+            NSManagedObjectContext* ctx = [[self cdContainer]viewContext];
+            if ([self currentNetworkStatus] > 0 && [[FreditAPI sharedInstance]isAuthenticated]) {
                 // Update modified
                 [ctx performBlockAndWait:^{
                     // Process Changes
@@ -85,7 +99,7 @@
                             [ctx deleteObject:trackable];
                         }
                     }
-                    NSLog(@"%i / %ul of Trackable Deletion Succeed", success, [removedEventList count]);
+                    NSLog(@"%i / %ld of Trackable Deletion Succeed", success, [removedEventList count]);
                     
                     // Event Update
                     NSFetchRequest* modifiedEvents = [[NSFetchRequest alloc]init];
@@ -105,7 +119,7 @@
                         }
                     }
                     [ctx save:nil];
-                    NSLog(@"%i / %ul of Trackable Update Succeed", success, [changedEventList count]);
+                    NSLog(@"%i / %ld of Trackable Update Succeed", success, [changedEventList count]);
                 }];
             }
             [self updateAllEventsFromServerInContext: ctx];

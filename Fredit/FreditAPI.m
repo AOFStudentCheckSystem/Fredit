@@ -59,6 +59,18 @@ NSString* rootURL = @"https://api.aofactivities.com/";
     return headersDict;
 }
 
+- (BOOL)sendMailforEvent: (Event*)evnt toAddress: (NSString*) str {
+    if ([self isAuthenticated]) {
+        UNIHTTPJsonResponse* response = [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
+            simpleRequest.url = [rootURL stringByAppendingString:@"event/sendmail"];
+            simpleRequest.headers = [self getHeaders];
+            [simpleRequest setParameters:@{@"eventId": evnt.eventId, @"address": str}];
+        }]asJson];
+        return response.code == 200 && [[response.body.JSONObject objectForKey:@"success"] boolValue];
+    }
+    return false;
+}
+
 - (NSDictionary*) listAllEvents {
     [UNIRest timeout:15];
     UNIHTTPJsonResponse* json = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {

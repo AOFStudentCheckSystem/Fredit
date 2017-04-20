@@ -18,6 +18,7 @@
 #import "SVProgressHUD.h"
 #import "EventDetailViewController.h"
 #import "EventDetailEditingTVC.h"
+#import "UIColor+ColorFromRGB.h"
 
 @interface EventMasterTVController() <NSFetchedResultsControllerDelegate, MGSwipeTableCellDelegate>
 
@@ -41,9 +42,11 @@
     
     request.entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:[self managedObjectContext]];
     request.predicate = [NSPredicate predicateWithFormat:@"changed >= 0"];
+    NSSortDescriptor *eventStatusSort = [NSSortDescriptor sortDescriptorWithKey:@"eventStatus" ascending:YES];
     NSSortDescriptor *eventTimeAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventTime" ascending:NO];
+    NSSortDescriptor *eventIdAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventId" ascending:NO];
     
-    [request setSortDescriptors:@[eventTimeAscSort]];
+    [request setSortDescriptors:@[eventStatusSort, eventTimeAscSort, eventIdAscSort]];
     
     NSManagedObjectContext *moc = [self managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
     
@@ -86,27 +89,6 @@
 }
 - (void) reloadData {
     if (self.refreshControl && !self.isUpdating) {
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//            self.isUpdating = true;
-//            NSManagedObjectContext* context = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-//            [context setParentContext:[self managedObjectContext]];
-//            [context performBlockAndWait:^{
-//                [FreditDataAccessObject updateAllEventsFromServerInContext:context];
-//                [[self managedObjectContext]save:nil];
-//            }];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//                [formatter setDateFormat:@"MMM d, h:mm a"];
-//                NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-//                NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-//                                                                            forKey:NSForegroundColorAttributeName];
-//                NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-//                self.refreshControl.attributedTitle = attributedTitle;
-//                [self.refreshControl endRefreshing];
-//                [SVProgressHUD dismiss];
-//                self.isUpdating = false;
-//            });
-//        });
         self.isUpdating = true;
         [[CoreDataSyncorization sharedSyncorization]attemptFullSyncorization:^{
             [self.refreshControl endRefreshing];
@@ -166,9 +148,23 @@
         [self presentViewController:controller animated:YES completion:nil];
         return true;
     }]];
-    
     cell.rightExpansion.fillOnTrigger = YES;
     cell.rightExpansion.buttonIndex = 0;
+    
+    cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Send Mail" backgroundColor:[UIColor colorWithRGB:0x007aff] callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        [SVProgressHUD showWithStatus:@"Sending..."];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            Event* this = (Event*)[[self fetchedResultsController] objectAtIndexPath:[self.tableView indexPathForCell:cell]];
+            [[FreditAPI sharedInstance]sendMailforEvent:this toAddress:@"codetector@codetector.cn"];
+            [SVProgressHUD dismiss];
+            [SVProgressHUD setMaximumDismissTimeInterval:1];
+            [SVProgressHUD showSuccessWithStatus:@"Email Sent"];
+        });
+        return true;
+    }]];
+    
+    cell.leftExpansion.buttonIndex = 0;
+    cell.leftExpansion.fillOnTrigger = YES;
     
     return cell;
 }

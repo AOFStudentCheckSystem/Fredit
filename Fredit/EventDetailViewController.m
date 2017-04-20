@@ -8,6 +8,7 @@
 
 #import "EventDetailViewController.h"
 #import "EventDetailEditingTVC.h"
+#import "UserInterfaceStrings.h"
 
 @interface EventDetailViewController ()
 @property (strong, nonatomic) Event* baseEvent;
@@ -57,7 +58,7 @@
 - (void) updateviewAccordingToBaseEvent {
     self.eventNameLabel.text = self.baseEvent.eventName;
     self.eventTimeLabel.text = [NSDateFormatter localizedStringFromDate:self.baseEvent.eventTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];;
-    self.eventStatusLabel.text = [NSString stringWithFormat:@"%i", self.baseEvent.eventStatus];
+    self.eventStatusLabel.attributedText = [UserInterfaceStrings localizedStringForEventStatus:self.baseEvent.eventStatus];
     self.eventIdLabel.text = self.baseEvent.eventId;
 }
 

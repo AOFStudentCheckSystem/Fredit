@@ -34,6 +34,8 @@
 		C07927081E9C594D005C0680 /* UIView+RoundCornerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C07927071E9C594D005C0680 /* UIView+RoundCornerUIView.m */; };
 		C08379AC1EA2764100206B83 /* NSDate+Rounding.m in Sources */ = {isa = PBXBuildFile; fileRef = C08379AB1EA2764100206B83 /* NSDate+Rounding.m */; };
 		C08379B01EA27FFE00206B83 /* FreditDataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C08379AF1EA27FFE00206B83 /* FreditDataAccessObject.m */; };
+		C0841D4C1EA944DD005A21C1 /* UserInterfaceStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C0841D4B1EA944DD005A21C1 /* UserInterfaceStrings.m */; };
+		C0841D4E1EA945A4005A21C1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0841D4D1EA945A4005A21C1 /* Localizable.strings */; };
 		C0B6B5FC1EA8175E00ABDB2D /* CoreDataSyncorization.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */; };
 		C0B6B6001EA81C2300ABDB2D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B6B5FF1EA81C2300ABDB2D /* Reachability.m */; };
 		C0C1A2821E9D465200AEA1E6 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C1A2811E9D465200AEA1E6 /* EventTableViewCell.m */; };
@@ -95,6 +97,9 @@
 		C08379AB1EA2764100206B83 /* NSDate+Rounding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Rounding.m"; sourceTree = "<group>"; };
 		C08379AE1EA27FFE00206B83 /* FreditDataAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreditDataAccessObject.h; sourceTree = "<group>"; };
 		C08379AF1EA27FFE00206B83 /* FreditDataAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreditDataAccessObject.m; sourceTree = "<group>"; };
+		C0841D4A1EA944DD005A21C1 /* UserInterfaceStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterfaceStrings.h; sourceTree = "<group>"; };
+		C0841D4B1EA944DD005A21C1 /* UserInterfaceStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceStrings.m; sourceTree = "<group>"; };
+		C0841D4D1EA945A4005A21C1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		C0B6B5FA1EA8175E00ABDB2D /* CoreDataSyncorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataSyncorization.h; sourceTree = "<group>"; };
 		C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataSyncorization.m; sourceTree = "<group>"; };
 		C0B6B5FE1EA81C2300ABDB2D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -196,6 +201,7 @@
 				C07926EE1E9C576E005C0680 /* AppDelegate.h */,
 				C07926EF1E9C576E005C0680 /* AppDelegate.m */,
 				C07926EC1E9C576E005C0680 /* main.m */,
+				C0841D4D1EA945A4005A21C1 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,6 +231,8 @@
 		C08379AD1EA27FD300206B83 /* FredtiAPIs */ = {
 			isa = PBXGroup;
 			children = (
+				C0841D4A1EA944DD005A21C1 /* UserInterfaceStrings.h */,
+				C0841D4B1EA944DD005A21C1 /* UserInterfaceStrings.m */,
 				C0B6B5F91EA8173100ABDB2D /* Data */,
 				C0F3DD281E9D01FA00AAC4E4 /* FreditAPI.h */,
 				C0F3DD291E9D01FA00AAC4E4 /* FreditAPI.m */,
@@ -364,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C07926FE1E9C576E005C0680 /* LaunchScreen.storyboard in Resources */,
+				C0841D4E1EA945A4005A21C1 /* Localizable.strings in Resources */,
 				C07926FB1E9C576E005C0680 /* Assets.xcassets in Resources */,
 				C07926F61E9C576E005C0680 /* Main.storyboard in Resources */,
 			);
@@ -428,6 +437,7 @@
 				C05F29711EA90243002458B7 /* TrackableObject+CoreDataProperties.m in Sources */,
 				C05F29741EA91B86002458B7 /* MainTabBarController.swift in Sources */,
 				C0080B371EA823FE00F62458 /* SignUpSheet+CoreDataProperties.m in Sources */,
+				C0841D4C1EA944DD005A21C1 /* UserInterfaceStrings.m in Sources */,
 				C0080B3D1EA823FE00F62458 /* Event+CoreDataProperties.m in Sources */,
 				C0F3DD2A1E9D01FA00AAC4E4 /* FreditAPI.m in Sources */,
 				C0F596191E9D97DC00408D9F /* AboutTableTableViewController.m in Sources */,

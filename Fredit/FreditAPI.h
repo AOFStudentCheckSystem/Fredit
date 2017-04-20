@@ -29,6 +29,8 @@ extern const NSString* rootURL;
 
 - (BOOL) creditEventWithId: (NSString*) eventId andEventName: (NSString*) name andTime: (NSDate*) time andDescription: (NSString*) description;
 
+- (BOOL)sendMailforEvent: (Event*)evnt toAddress: (NSString*) str;
+
 - (BOOL) isAuthenticated;
 
 @end
