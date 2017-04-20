@@ -18,7 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [CoreDataSyncorization sharedSyncorization];
+    [[CoreDataSyncorization sharedSyncorization]attemptFullSyncorization:nil];
     // Override point for customization after application launch.
     return YES;
 }
