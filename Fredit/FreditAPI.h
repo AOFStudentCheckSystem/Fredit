@@ -14,7 +14,7 @@
 @property (strong, nonatomic, readonly) NSString* userAuthorizationToken;
 
 extern const NSString* rootURL;
-
++ (BOOL) isDeviceOnline;
 + (instancetype) sharedInstance;
 
 - (NSDictionary*) listAllEvents;
@@ -32,5 +32,5 @@ extern const NSString* rootURL;
 - (BOOL)sendMailforEvent: (Event*)evnt toAddress: (NSString*) str;
 
 - (BOOL) isAuthenticated;
-
+- (NSDictionary*) fetchRecordsForEvent: (Event*) event;
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Event+CoreDataClass.h"
 
-@interface EventDetailViewController : UIViewController
+@interface EventDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 // <UITableViewDelegate, UITableViewDataSource>
 
 - (void) populateViewWithEvent: (Event*) event;

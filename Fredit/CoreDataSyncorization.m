@@ -99,7 +99,7 @@
                             [ctx deleteObject:trackable];
                         }
                     }
-                    NSLog(@"%i / %ld of Trackable Deletion Succeed", success, [removedEventList count]);
+                    NSLog(@"%i / %ld of Trackable Deletion Succeed", success, (unsigned long)[removedEventList count]);
                     
                     // Event Update
                     NSFetchRequest* modifiedEvents = [[NSFetchRequest alloc]init];
@@ -119,7 +119,7 @@
                         }
                     }
                     [ctx save:nil];
-                    NSLog(@"%i / %ld of Trackable Update Succeed", success, [changedEventList count]);
+                    NSLog(@"%i / %ld of Trackable Update Succeed", success, (unsigned long) [changedEventList count]);
                 }];
             }
             [self updateAllEventsFromServerInContext: ctx];

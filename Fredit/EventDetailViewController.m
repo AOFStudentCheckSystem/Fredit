@@ -9,6 +9,7 @@
 #import "EventDetailViewController.h"
 #import "EventDetailEditingTVC.h"
 #import "UserInterfaceStrings.h"
+#import "FreditAPI.h"
 
 @interface EventDetailViewController ()
 @property (strong, nonatomic) Event* baseEvent;
@@ -38,6 +39,8 @@
         [self updateviewAccordingToBaseEvent];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEventChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:self.baseEvent.managedObjectContext];
+    [[self signUpTableView]setDataSource:self];
+    [[self signUpTableView]setDelegate:self];
 }
 
 - (void) onEventChange: (NSNotification*) n {
@@ -55,11 +58,32 @@
     }
 }
 
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [tableView dequeueReusableCellWithIdentifier:@"eventRecordCell"];
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [[self signUpTableView]deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void) updateviewAccordingToBaseEvent {
     self.eventNameLabel.text = self.baseEvent.eventName;
     self.eventTimeLabel.text = [NSDateFormatter localizedStringFromDate:self.baseEvent.eventTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];;
     self.eventStatusLabel.attributedText = [UserInterfaceStrings localizedStringForEventStatus:self.baseEvent.eventStatus];
     self.eventIdLabel.text = self.baseEvent.eventId;
+    
+    if ([FreditAPI isDeviceOnline]) {
+        NSLog(@"%@",[[FreditAPI sharedInstance]fetchRecordsForEvent:self.baseEvent]);
+    }
+    
 }
 
 - (void) showEditView{

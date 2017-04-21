@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JDStatusBarNotification
 
 class MainTabBarController: UITabBarController {
     
@@ -25,6 +26,11 @@ class MainTabBarController: UITabBarController {
     func networkStatusChanged(n: Notification) {
         if n.object is Reachability {
             NSLog("Reachable: %i", (n.object as! Reachability).currentReachabilityStatus().rawValue)
+            if ((n.object as! Reachability).currentReachabilityStatus().rawValue == 0) {
+                JDStatusBarNotification.show(withStatus: "Disconnected", dismissAfter: 3, styleName: JDStatusBarStyleWarning)
+            } else {
+                JDStatusBarNotification.show(withStatus: "Connectoed", dismissAfter: 3, styleName: JDStatusBarStyleSuccess)
+            }
         }
     }
     

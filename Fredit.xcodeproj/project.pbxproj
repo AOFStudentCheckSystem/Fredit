@@ -36,6 +36,8 @@
 		C08379B01EA27FFE00206B83 /* FreditDataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C08379AF1EA27FFE00206B83 /* FreditDataAccessObject.m */; };
 		C0841D4C1EA944DD005A21C1 /* UserInterfaceStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = C0841D4B1EA944DD005A21C1 /* UserInterfaceStrings.m */; };
 		C0841D4E1EA945A4005A21C1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0841D4D1EA945A4005A21C1 /* Localizable.strings */; };
+		C0997A001EAACCA900080866 /* StudentTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C09979FF1EAACCA900080866 /* StudentTVC.m */; };
+		C0997A031EAACCC800080866 /* StudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0997A021EAACCC800080866 /* StudentTableViewCell.m */; };
 		C0B6B5FC1EA8175E00ABDB2D /* CoreDataSyncorization.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */; };
 		C0B6B6001EA81C2300ABDB2D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B6B5FF1EA81C2300ABDB2D /* Reachability.m */; };
 		C0C1A2821E9D465200AEA1E6 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C1A2811E9D465200AEA1E6 /* EventTableViewCell.m */; };
@@ -100,6 +102,10 @@
 		C0841D4A1EA944DD005A21C1 /* UserInterfaceStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterfaceStrings.h; sourceTree = "<group>"; };
 		C0841D4B1EA944DD005A21C1 /* UserInterfaceStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceStrings.m; sourceTree = "<group>"; };
 		C0841D4D1EA945A4005A21C1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		C09979FE1EAACCA900080866 /* StudentTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentTVC.h; sourceTree = "<group>"; };
+		C09979FF1EAACCA900080866 /* StudentTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentTVC.m; sourceTree = "<group>"; };
+		C0997A011EAACCC800080866 /* StudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentTableViewCell.h; sourceTree = "<group>"; };
+		C0997A021EAACCC800080866 /* StudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentTableViewCell.m; sourceTree = "<group>"; };
 		C0B6B5FA1EA8175E00ABDB2D /* CoreDataSyncorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataSyncorization.h; sourceTree = "<group>"; };
 		C0B6B5FB1EA8175E00ABDB2D /* CoreDataSyncorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataSyncorization.m; sourceTree = "<group>"; };
 		C0B6B5FE1EA81C2300ABDB2D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 				C0F596161E9D97C300408D9F /* AboutView */,
 				C0F3DD2F1E9D2A1300AAC4E4 /* Datamodel */,
 				C0483C2E1E9CF1B600B0B2C0 /* EventViewControllers */,
+				C09979FD1EAACC2C00080866 /* Student View */,
 				C07927051E9C592B005C0680 /* Categories */,
 				C07926F11E9C576E005C0680 /* LoginViewController.h */,
 				C07926F21E9C576E005C0680 /* LoginViewController.m */,
@@ -240,6 +247,17 @@
 				C08379AF1EA27FFE00206B83 /* FreditDataAccessObject.m */,
 			);
 			name = FredtiAPIs;
+			sourceTree = "<group>";
+		};
+		C09979FD1EAACC2C00080866 /* Student View */ = {
+			isa = PBXGroup;
+			children = (
+				C09979FE1EAACCA900080866 /* StudentTVC.h */,
+				C09979FF1EAACCA900080866 /* StudentTVC.m */,
+				C0997A011EAACCC800080866 /* StudentTableViewCell.h */,
+				C0997A021EAACCC800080866 /* StudentTableViewCell.m */,
+			);
+			name = "Student View";
 			sourceTree = "<group>";
 		};
 		C0B6B5F91EA8173100ABDB2D /* Data */ = {
@@ -460,9 +478,11 @@
 				C0080B381EA823FE00F62458 /* Student+CoreDataClass.m in Sources */,
 				C08379B01EA27FFE00206B83 /* FreditDataAccessObject.m in Sources */,
 				C0483C311E9CF1D400B0B2C0 /* EventMasterTVController.m in Sources */,
+				C0997A001EAACCA900080866 /* StudentTVC.m in Sources */,
 				C07926ED1E9C576E005C0680 /* main.m in Sources */,
 				C0B6B6001EA81C2300ABDB2D /* Reachability.m in Sources */,
 				C0080B351EA823FE00F62458 /* EventGroup+CoreDataProperties.m in Sources */,
+				C0997A031EAACCC800080866 /* StudentTableViewCell.m in Sources */,
 				C0C1A2851E9D654400AEA1E6 /* EventSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -171,8 +171,16 @@
 
 
 
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//}
+
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ([[self tableView]indexPathForSelectedRow]) {
+        [[self tableView]deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    }
 }
 
 #pragma CoreData delegate

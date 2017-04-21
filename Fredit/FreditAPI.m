@@ -8,6 +8,7 @@
 
 #import "FreditAPI.h"
 #import "UNIRest.h"
+#import "AppDelegate.h"
 @interface FreditAPI()
 
 @property (strong, nonatomic, readwrite) NSString* userAuthorizationToken;
@@ -17,6 +18,10 @@
 @implementation FreditAPI
 
 NSString* rootURL = @"https://api.aofactivities.com/";
+
++ (BOOL) isDeviceOnline {
+    return [[(AppDelegate*)[[UIApplication sharedApplication]delegate] hostReachability]currentReachabilityStatus] != 0;
+}
 
 + (instancetype)sharedInstance
 {
@@ -87,7 +92,7 @@ NSString* rootURL = @"https://api.aofactivities.com/";
         [simpleRequest setHeaders:[self getHeaders]];
         [simpleRequest setParameters:@{@"email": username, @"password": password}];
     }]asJson];
-    NSLog(@"Network => %li", json.code);
+    NSLog(@"Network => %li", (long)json.code);
     if (json.code == 200) {
         NSString* token = [json.body.object objectForKey: @"token"];
         [[NSUserDefaults standardUserDefaults]setObject:token forKey:@"AuthorizationToken"];
@@ -139,6 +144,22 @@ NSString* rootURL = @"https://api.aofactivities.com/";
         simpleRequest.parameters = params;
     }] asJson];
     return r.code == 200 && [[r.body.JSONObject objectForKey:@"success"] boolValue];
+}
+
+- (NSDictionary*) fetchRecordsForEvent: (Event*) event {
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setHeaders:[self getHeaders]];
+        simpleRequest.url = [rootURL stringByAppendingString:[NSString stringWithFormat:@"checkin/record/%@", event.eventId]];
+    }] asJson];
+    return response.body.object;
+}
+
+- (NSArray *) fetchAllStudent {
+    UNIHTTPJsonResponse* response = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setHeaders:[self getHeaders]];
+        simpleRequest.url = [rootURL stringByAppendingString:@"student/listall"];
+    }] asJson];
+    return response.body.array;
 }
 
 @end
