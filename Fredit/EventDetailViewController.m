@@ -79,10 +79,10 @@
     self.eventTimeLabel.text = [NSDateFormatter localizedStringFromDate:self.baseEvent.eventTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterShortStyle];;
     self.eventStatusLabel.attributedText = [UserInterfaceStrings localizedStringForEventStatus:self.baseEvent.eventStatus];
     self.eventIdLabel.text = self.baseEvent.eventId;
-    
-    if ([FreditAPI isDeviceOnline]) {
-        NSLog(@"%@",[[FreditAPI sharedInstance]fetchRecordsForEvent:self.baseEvent]);
-    }
+//    
+//    if ([FreditAPI isDeviceOnline]) {
+//        NSLog(@"%@",[[FreditAPI sharedInstance]fetchRecordsForEvent:self.baseEvent]);
+//    }
     
 }
 

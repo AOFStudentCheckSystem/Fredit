@@ -42,11 +42,10 @@
     
     request.entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:[self managedObjectContext]];
     request.predicate = [NSPredicate predicateWithFormat:@"changed >= 0"];
-    NSSortDescriptor *eventStatusSort = [NSSortDescriptor sortDescriptorWithKey:@"eventStatus" ascending:YES];
     NSSortDescriptor *eventTimeAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventTime" ascending:NO];
     NSSortDescriptor *eventIdAscSort = [NSSortDescriptor sortDescriptorWithKey:@"eventId" ascending:NO];
     
-    [request setSortDescriptors:@[eventStatusSort, eventTimeAscSort, eventIdAscSort]];
+    [request setSortDescriptors:@[eventTimeAscSort, eventIdAscSort]];
     
     NSManagedObjectContext *moc = [self managedObjectContext]; //Retrieve the main queue NSManagedObjectContext
     

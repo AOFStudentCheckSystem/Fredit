@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "Reachability.h"
+#import "Student+CoreDataClass.h";
 
 @interface CoreDataSyncorization()
 
@@ -137,6 +138,60 @@
     }
 }
 
+- (void) syncorizeAllStudents {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self saveAllStudentInContext:[[self cdContainer] viewContext]];
+    });
+}
+
+- (void) saveAllStudentInContext: (NSManagedObjectContext *)context {
+    NSArray* students = [[FreditAPI sharedInstance]fetchAllStudent];
+    NSMutableArray* studentIds = [[NSMutableArray alloc]init];
+    [context performBlockAndWait:^{
+        for (NSDictionary* student in students) {
+            NSString* studentId =[student objectForKey:@"idNumber"];
+            [studentIds addObject:studentId];
+            Student* stu = [Student fetchOrCreateWithStudentId:studentId inManagedObjectContext:[[self cdContainer]viewContext]];
+            if (![stu.firstName isEqualToString:[student objectForKey:@"firstName"]]) {
+                stu.firstName = [student objectForKey:@"firstName"];
+            }
+            if (![stu.cardSecret isEqualToString:[student objectForKey:@"cardSecret"]]) {
+                if ([student objectForKey:@"cardSecret"] != [NSNull null]){
+                    stu.cardSecret = [student objectForKey:@"cardSecret"];
+                }
+            }
+            if (![stu.idNumber isEqualToString:[student objectForKey:@"idNumber"]]) {
+                if ([student objectForKey:@"idNumber"] != [NSNull null]){
+                    stu.idNumber = [student objectForKey:@"idNumber"];
+                }
+            }
+            if (![stu.lastName isEqualToString:[student objectForKey:@"lastName"]]) {
+                stu.lastName = [student objectForKey:@"lastName"];
+            }
+            if (![stu.preferredName isEqualToString:[student objectForKey:@"preferredName"]]) {
+                if ([student objectForKey:@"preferredName"] != [NSNull null]){
+                    stu.preferredName = [student objectForKey:@"preferredName"];
+                }
+            }
+            if (stu.changed != 0) {
+                stu.changed = 0;
+            }
+        }
+        // Removing
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Student"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"NOT (idNumber in %@)" argumentArray:@[studentIds]]];
+        NSArray* delArray = [context executeFetchRequest:request error:nil];
+        for (NSManagedObject* obj in delArray) {
+            [context deleteObject:obj];
+        }
+        [context save:nil];
+        [[[self cdContainer]viewContext]performBlockAndWait:^{
+            [[[self cdContainer]viewContext]refreshAllObjects];
+            [[[self cdContainer]viewContext]save:nil];
+        }];
+    }];
+}
+
 - (void) updateAllEventsFromServerInContext:(NSManagedObjectContext *)context {
     NSDictionary* data = [[FreditAPI sharedInstance] listAllEvents];
     if (data != nil) {
@@ -177,7 +232,6 @@
             NSArray* delArray = [context executeFetchRequest:request error:nil];
             for (NSManagedObject* obj in delArray) {
                 [context deleteObject:obj];
-                NSLog(@"Removing %@", [(Event*)obj eventName]);
             }
             //Save Data
             [context save:nil];

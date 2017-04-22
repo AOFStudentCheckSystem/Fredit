@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface StudentTVC : UITableViewController
+@interface StudentTVC : UITableViewController<NSFetchedResultsControllerDelegate>
 
 @end

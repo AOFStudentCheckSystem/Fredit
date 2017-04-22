@@ -28,10 +28,10 @@
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="eventGroups" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventGroup" inverseName="inSheets" inverseEntity="EventGroup" syncable="YES"/>
     </entity>
-    <entity name="Student" representedClassName="Student" syncable="YES">
+    <entity name="Student" representedClassName="Student" parentEntity="TrackableObject" syncable="YES">
         <attribute name="cardSecret" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="idNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="idNumber" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="preferredName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EventRecord" inverseName="student" inverseEntity="EventRecord" syncable="YES"/>
@@ -44,7 +44,7 @@
         <element name="EventGroup" positionX="-234" positionY="-234" width="128" height="103"/>
         <element name="EventRecord" positionX="-191" positionY="-27" width="128" height="118"/>
         <element name="SignUpSheet" positionX="-38" positionY="-252" width="128" height="103"/>
-        <element name="Student" positionX="27" positionY="-117" width="128" height="133"/>
+        <element name="Student" positionX="-452" positionY="56" width="128" height="133"/>
         <element name="TrackableObject" positionX="-783" positionY="-234" width="128" height="58"/>
     </elements>
 </model>

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Student+CoreDataClass.h"
 
 @interface StudentTableViewCell : UITableViewCell
+
+- (void) refreshContentWithStudent: (Student* )student;
 
 @end

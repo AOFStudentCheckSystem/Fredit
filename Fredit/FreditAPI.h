@@ -33,4 +33,5 @@ extern const NSString* rootURL;
 
 - (BOOL) isAuthenticated;
 - (NSDictionary*) fetchRecordsForEvent: (Event*) event;
+- (NSArray *) fetchAllStudent;
 @end

@@ -2,7 +2,7 @@
 //  Student+CoreDataProperties.m
 //  Fredit
 //
-//  Created by Codetector on 2017/4/20.
+//  Created by Codetector on 2017/4/22.
 //  Copyright © 2017年 GuardianTechnologies. All rights reserved.
 //
 

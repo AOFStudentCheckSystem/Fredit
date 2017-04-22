@@ -14,4 +14,6 @@
 
 - (void) attemptFullSyncorization: (void (^)())complete ;
 
+- (void) syncorizeAllStudents;
+
 @end
