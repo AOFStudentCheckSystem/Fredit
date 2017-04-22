@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface StudentTVC : UITableViewController<NSFetchedResultsControllerDelegate>
+@interface StudentTVC : UITableViewController<NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @end

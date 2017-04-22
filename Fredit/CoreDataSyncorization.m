@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "Reachability.h"
-#import "Student+CoreDataClass.h";
+#import "Student+CoreDataClass.h"
 
 @interface CoreDataSyncorization()
 

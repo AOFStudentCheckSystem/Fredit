@@ -28,6 +28,10 @@
                             action:@selector(reloadData)
                   forControlEvents:UIControlEventValueChanged];
     
+    UISearchBar* searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 0)];
+    self.tableView.tableHeaderView = searchBar;
+    [searchBar sizeToFit];
+    
     [self initializeFetchedResultsController];
 }
 
@@ -116,7 +120,7 @@
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return self.fetchedResultsController.sections;
+    return self.fetchedResultsController.sectionIndexTitles;
 }
 #pragma CoreData delegate
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
