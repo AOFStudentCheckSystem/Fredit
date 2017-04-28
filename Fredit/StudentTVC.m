@@ -81,6 +81,10 @@
     [self.refreshControl endRefreshing];
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger number = [[[self fetchedResultsController]sections]count];
     if (number == 0 || [[[self fetchedResultsController]sections][0]numberOfObjects] == 0) {
